@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         Title="Aplikacja" 
         Height="450" Width="800"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Background="#001334">
     
     <Grid>
-
+        
     </Grid>
 </Window>
