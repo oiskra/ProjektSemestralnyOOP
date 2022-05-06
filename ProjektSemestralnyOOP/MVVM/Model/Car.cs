@@ -12,10 +12,11 @@ namespace ProjektSemestralnyOOP.MVVM.Model
         public string Brand { get; set; }
         public string Model { get; set; }
         public int Price { get; set; }
+        public bool IsAvailable { get; set; }
 
         public Statistic Statistics { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public User User { get; set; }
 
     }

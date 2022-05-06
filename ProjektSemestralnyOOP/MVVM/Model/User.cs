@@ -15,6 +15,5 @@ namespace ProjektSemestralnyOOP.MVVM.Model
         public int Money { get; set; }
 
         public List<Car> Cars { get; set; }
-        public List<Race> Races { get; set; }
     }
 }
