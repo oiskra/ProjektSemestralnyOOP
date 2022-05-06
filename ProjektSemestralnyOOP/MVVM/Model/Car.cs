@@ -8,12 +8,15 @@ namespace ProjektSemestralnyOOP.MVVM.Model
 {
     public class Car
     {
-        public int CarId { get; set; }
+        public int Id { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public int Price { get; set; }
 
-        public Statistics Statistics { get; set; }
+        public Statistic Statistics { get; set; }
+
+        public int UserId { get; set; }
+        public User User { get; set; }
 
     }
 }

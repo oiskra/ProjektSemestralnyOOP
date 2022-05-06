@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProjektSemestralnyOOP.MVVM.Model
 {
-    public class Statistics
+    public class Statistic
     {
-        public int StatisticsId { get; set; }
+        public int Id { get; set; }
         public int Speed { get; set; }
         public int Acceleration { get; set; }
         public int Grip { get; set; }
         public int Braking { get; set; }
+
 
         public int CarId { get; set; }
         public Car Car { get; set; }
