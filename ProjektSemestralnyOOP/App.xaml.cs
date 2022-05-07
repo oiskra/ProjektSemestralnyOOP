@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ProjektSemestralnyOOP.DBcontext;
+using ProjektSemestralnyOOP.MVVM.Model;
+using ProjektSemestralnyOOP.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +16,6 @@ namespace ProjektSemestralnyOOP
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

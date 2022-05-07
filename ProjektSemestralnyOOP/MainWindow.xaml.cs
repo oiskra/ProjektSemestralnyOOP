@@ -23,6 +23,8 @@ namespace ProjektSemestralnyOOP
         public MainWindow()
         {
             InitializeComponent();
+
+            
         }
     }
 }

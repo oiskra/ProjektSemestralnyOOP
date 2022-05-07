@@ -1,46 +1,70 @@
-﻿using ProjektSemestralnyOOP.DBcontext;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjektSemestralnyOOP.Services
 {
+    /// <summary>
+    /// Provides methods that operate with database and User entity 
+    /// </summary>
     public class UserService : IUserService
     {
-        private readonly RacingDBContext _context;
-
-        public Task<bool> DeleteUserAsync(int id)
+        private readonly RacingDBContextFactory _contextF;
+        
+        public UserService(RacingDBContextFactory context)
         {
-            throw new NotImplementedException();
+            _contextF = context;
+        }
+        
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            using RacingDBContext context = _contextF.CreateDbContext();
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            context.Users.Remove(user);
+            await context.SaveChangesAsync();
+            return true;
         }
 
-        public Task LoginUserAsync(string login, string password)
+        public async Task<User> LoginUserAsync(string login, string password)
         {
-            throw new NotImplementedException();
+            using RacingDBContext context = _contextF.CreateDbContext();
+            var loggedUser = await context.Users.FirstAsync(x => x.Login == login && x.Password == password);
+            return loggedUser;
         }
 
-        public Task<ICollection<User>> ReadAllAsync()
+        public async Task<ICollection<User>> ReadAllAsync()
         {
-            throw new NotImplementedException();
+            using RacingDBContext context = _contextF.CreateDbContext();
+            var allUsers = await context.Users.ToListAsync();
+            return allUsers;
         }
 
-        public Task<User> ReadUserAsync()
+        public async Task<User> ReadUserAsync(int id)
         {
-            throw new NotImplementedException();
+            using RacingDBContext context = _contextF.CreateDbContext();
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return user;
         }
 
-        public Task RegisterUserAsync(User entity)
+        public async Task RegisterUserAsync(User user)
         {
-            throw new NotImplementedException();
+            using RacingDBContext context = _contextF.CreateDbContext();
+            var addedUser = await context.Users.AddAsync(user);
+            await context.SaveChangesAsync();
         }
 
-        public Task UpdateUserAsync(int id)
+        public async Task UpdateUserAsync(int id)
         {
-            throw new NotImplementedException();
+            using RacingDBContext context = _contextF.CreateDbContext();
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            context.Users.Update(user);
+            await context.SaveChangesAsync();
         }
+
     }
 }

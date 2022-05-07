@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 namespace ProjektSemestralnyOOP.Interfaces
 {
+    
+    ///<summary>Defines methods that operate with database and Car entity</summary>
     public interface ICarService
     {
         Task CreateCarAsync(Car entity);
