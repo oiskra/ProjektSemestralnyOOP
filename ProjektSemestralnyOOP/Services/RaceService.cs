@@ -1,8 +1,10 @@
-﻿using ProjektSemestralnyOOP.DBcontext;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjektSemestralnyOOP.Services
@@ -14,24 +16,28 @@ namespace ProjektSemestralnyOOP.Services
     {
         private readonly RacingDBContext _context;
 
-        public RaceService(RacingDBContext context)
+        public RaceService(RacingDBContextFactory context)
         {
-            _context = context;
+            _context = context.CreateDbContext();
         }
 
         public async Task CreateRaceAsync(Race entity)
         {
-            throw new NotImplementedException();
+            await _context.Races.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ICollection<Race>> ReadAllRaces()
         {
-            throw new NotImplementedException();
+            var races = await _context.Races.ToListAsync();
+            return races;
         }
 
-        public async Task<ICollection<Race>> ReadRaceAsync()
+        public async Task<ICollection<Race>> ReadRaceAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstAsync(x => x.Id == id);
+            var userRaces = await  _context.Races.Where(x => x.RacerOne == user.Username || x.RacerTwo == user.Username).ToListAsync();
+            return userRaces;
         }
     }
 }

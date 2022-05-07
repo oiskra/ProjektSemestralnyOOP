@@ -14,56 +14,55 @@ namespace ProjektSemestralnyOOP.Services
     /// </summary>
     public class UserService : IUserService
     {
-        private readonly RacingDBContextFactory _contextF;
-        
+        private readonly RacingDBContext _context;
+
         public UserService(RacingDBContextFactory context)
         {
-            _contextF = context;
+            _context = context.CreateDbContext();
         }
-        
+
         public async Task<bool> DeleteUserAsync(int id)
         {
-            using RacingDBContext context = _contextF.CreateDbContext();
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            context.Users.Remove(user);
-            await context.SaveChangesAsync();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
             return true;
         }
 
         public async Task<User> LoginUserAsync(string login, string password)
         {
-            using RacingDBContext context = _contextF.CreateDbContext();
-            var loggedUser = await context.Users.FirstAsync(x => x.Login == login && x.Password == password);
+            var loggedUser = await _context.Users.FirstAsync(x => x.Login == login && x.Password == password);
             return loggedUser;
         }
 
         public async Task<ICollection<User>> ReadAllAsync()
         {
-            using RacingDBContext context = _contextF.CreateDbContext();
-            var allUsers = await context.Users.ToListAsync();
+            var allUsers = await _context.Users.ToListAsync();
             return allUsers;
         }
 
         public async Task<User> ReadUserAsync(int id)
         {
-            using RacingDBContext context = _contextF.CreateDbContext();
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             return user;
         }
 
         public async Task RegisterUserAsync(User user)
         {
-            using RacingDBContext context = _contextF.CreateDbContext();
-            var addedUser = await context.Users.AddAsync(user);
-            await context.SaveChangesAsync();
+            var ifExists = await _context.Users.AnyAsync(x => x.Id == user.Id);
+            if (!ifExists)
+            {
+                var addedUser = await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
+                return;
+            }
         }
 
         public async Task UpdateUserAsync(int id)
         {
-            using RacingDBContext context = _contextF.CreateDbContext();
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            context.Users.Update(user);
-            await context.SaveChangesAsync();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
         }
 
     }
