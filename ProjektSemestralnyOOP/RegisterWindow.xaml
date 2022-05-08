@@ -8,7 +8,6 @@
         Title="Register" 
         Height="500" 
         Width="350"
-        WindowStyle="None"
         ResizeMode="NoResize"
         Background="#001334">
 
