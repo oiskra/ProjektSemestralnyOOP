@@ -6,11 +6,20 @@
         xmlns:local="clr-namespace:ProjektSemestralnyOOP"
         mc:Ignorable="d"
         Title="Aplikacja" 
-        Height="450" Width="800"
+        Height="600" Width="1000"
         ResizeMode="NoResize"
         Background="#001334">
 
     <Grid>
-        
+        <Rectangle Width="1000" Height="600" Grid.ColumnSpan="3" Grid.RowSpan="7">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#001340" Offset="0.0" />
+                    <GradientStop Color="#001340" Offset="0.5" />
+                    <GradientStop Color="#00136f" Offset="1" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
     </Grid>
 </Window>
