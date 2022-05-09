@@ -42,8 +42,7 @@
                      Width="200"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
-                     FontFamily="Segoe UI Light"
-                     BorderBrush="White">
+                     FontFamily="Segoe UI Light">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -65,11 +64,12 @@
                      FontFamily="Segoe UI Light"
                      Style="{StaticResource PasswordBoxRound}">
                 <PasswordBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
+                    <Style TargetType="{x:Type Border}" >
+                        <Setter Property="CornerRadius" Value="40213212"/>
                     </Style>
                 </PasswordBox.Resources>
             </PasswordBox>
+
 
             <Button Height="35" 
                     Width="175"
