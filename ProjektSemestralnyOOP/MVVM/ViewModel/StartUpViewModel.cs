@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
-    public class StartUpViewModel
+    public class StartUpViewModel 
     {
         public ICommand LoginButton { get; }
         public ICommand RegisterButton { get; }

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
 
         private object _currentView;
@@ -23,20 +23,12 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
-        public StartUpViewModel StartUpVM { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public StartUpViewModel StartUpVM { get; }
 
         public MainViewModel()
         {
             StartUpVM = new StartUpViewModel();
-            CurrentView = StartUpVM;
-        }
-
-
-        private void OnPropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            _currentView = StartUpVM;
         }
     }
 }
