@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProjektSemestralnyOOP"
+        xmlns:local="clr-namespace:ProjektSemestralnyOOP" xmlns:viewmodel="clr-namespace:ProjektSemestralnyOOP.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:RegisterViewModel}"
         mc:Ignorable="d"
         Title="Register" 
         Height="500" 
@@ -50,7 +50,8 @@
                      Width="200"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
-                     FontFamily="Segoe UI Light">
+                     FontFamily="Segoe UI Light"
+                     Text="{Binding Username}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -69,7 +70,8 @@
                      Width="200"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
-                     FontFamily="Segoe UI Light">
+                     FontFamily="Segoe UI Light"
+                     Text="{Binding Login}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -84,12 +86,18 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Margin="0 5 0 0"/>
-            <PasswordBox Height="35" 
+            <TextBox Height="35" 
                      Width="200"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
-                     FontFamily="Segoe UI Light"
-                     Style="{StaticResource PasswordBoxRound}"/>
+                     FontFamily="pack://application:,,,/Resources/#password"
+                     Text="{Binding Password}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
 
 
 
@@ -99,7 +107,8 @@
                     Background="#0f004a"
                     Content="SIGN UP"
                     Foreground="White"
-                    BorderBrush="Black">
+                    BorderBrush="Black"
+                    Command="{Binding SubmitCommand}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"/>
@@ -112,7 +121,8 @@
                     Background="#0f004a"
                     Content="CANCEL"
                     Foreground="White"
-                    BorderBrush="Black">
+                    BorderBrush="Black"
+                    Command="{Binding CancelCommand}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"/>

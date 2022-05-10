@@ -41,19 +41,19 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         public LoginViewModel(LoginWindow window)
         {
-            SubmitButton = new RelayCommand(SubmitCommand);
-            CancelButton = new RelayCommand(CancelCommand);
+            SubmitButton = new RelayCommand(SubmitLoginCommand);
+            CancelButton = new RelayCommand(CancelLoginCommand);
             Window = window;
         }
 
-        private void CancelCommand()
+        private void CancelLoginCommand()
         {
             Window.Close();
         }
 
-        private async void SubmitCommand()
+        private async void SubmitLoginCommand()
         {
-            UserService service = new(new RacingDBContextFactory());
+            IUserService service = new UserService(new RacingDBContextFactory());
             bool isLogged = await service.LoginUserAsync(Login, Password);
 
             if (isLogged) 
