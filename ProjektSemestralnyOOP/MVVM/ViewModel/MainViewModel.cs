@@ -1,8 +1,6 @@
 ﻿using ProjektSemestralnyOOP.Commands;
 using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.Services;
 using System.Windows;
@@ -19,7 +17,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             set
             {
                 _currentView = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
 

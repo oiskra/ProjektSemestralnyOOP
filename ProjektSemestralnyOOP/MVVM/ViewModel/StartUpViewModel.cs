@@ -18,13 +18,13 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private void RegisterCommand()
         {
             Window window = new RegisterWindow();
-            window.ShowDialog();
+            window.Show();
         }
 
         private void LoginCommand()
         {
             Window window = new LoginWindow();
-            window.ShowDialog();
+            window.Show();
         }
     }
 }

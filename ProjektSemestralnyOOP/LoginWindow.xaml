@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektSemestralnyOOP"
+        xmlns:viewModel="clr-namespace:ProjektSemestralnyOOP.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewModel:LoginViewModel}"
         mc:Ignorable="d"
         Title="Login" 
         Height="500" 
         Width="350"
         ResizeMode="NoResize"
         Background="#001334">
-    
     <Grid>
         <Rectangle Width="350" Height="500" Grid.ColumnSpan="3" Grid.RowSpan="7">
             <Rectangle.Fill>
@@ -22,7 +22,6 @@
         </Rectangle>
 
         <StackPanel>
-
             <TextBlock Text="LOGIN FORM"
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" 
@@ -42,7 +41,8 @@
                      Width="200"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
-                     FontFamily="Segoe UI Light">
+                     FontFamily="Segoe UI Light"
+                     Text="{Binding Login}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -57,18 +57,19 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Margin="0 5 0 0"/>
-            <PasswordBox Height="35" 
+            <TextBox Height="35" 
                      Width="200"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
-                     FontFamily="Segoe UI Light"
-                     Style="{StaticResource PasswordBoxRound}">
-                <PasswordBox.Resources>
-                    <Style TargetType="{x:Type Border}" >
-                        <Setter Property="CornerRadius" Value="40213212"/>
+                     FontFamily="pack://application:,,,/Resources/#password"
+                     Text="{Binding Password}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
                     </Style>
-                </PasswordBox.Resources>
-            </PasswordBox>
+                </TextBox.Resources>
+            </TextBox>
+
 
 
             <Button Height="35" 
@@ -77,7 +78,8 @@
                     Background="#0f004a"
                     Content="LOG IN"
                     Foreground="White"
-                    BorderBrush="Black">
+                    BorderBrush="Black"
+                    Command="{Binding SubmitButton}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"/>
@@ -90,7 +92,8 @@
                     Background="#0f004a"
                     Content="CANCEL"
                     Foreground="White"
-                    BorderBrush="Black">
+                    BorderBrush="Black"
+                    Command="{Binding CancelButton}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"/>

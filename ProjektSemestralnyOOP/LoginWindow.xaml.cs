@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjektSemestralnyOOP.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace ProjektSemestralnyOOP
         public LoginWindow()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel(this);
         }
+
     }
 }

@@ -6,15 +6,12 @@
              xmlns:view ="clr-namespace:ProjektSemestralnyOOP.MVVM.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Style/PasswordBoxRound.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+        <DataTemplate DataType="{x:Type viewModel:StartUpViewModel}">
+            <view:StartUpView/>
+        </DataTemplate>
+       
 
-            <DataTemplate DataType="{x:Type viewModel:StartUpViewModel}">
-                <view:StartUpView/>
-            </DataTemplate>
-        </ResourceDictionary>
+
         
 
     </Application.Resources>

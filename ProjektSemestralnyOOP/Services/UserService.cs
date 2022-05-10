@@ -31,8 +31,12 @@ namespace ProjektSemestralnyOOP.Services
 
         public async Task<bool> LoginUserAsync(string login, string password)
         {
-            var loggedUser = await  _context.Users.FirstAsync(x => x.Login == login && x.Password == password);
-            return loggedUser != null;
+            try
+            {
+                User loggedUser = await _context.Users.FirstAsync(x => x.Login == login && x.Password == password);
+                return true;
+            }
+            catch { return false; }
         }
 
         public async Task<ICollection<User>> ReadAllAsync()
@@ -64,6 +68,5 @@ namespace ProjektSemestralnyOOP.Services
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
-
     }
 }
