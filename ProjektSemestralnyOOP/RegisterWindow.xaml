@@ -12,8 +12,6 @@
         Background="#001334">
 
     <Grid>
-         
-
         <Rectangle Width="350" Height="500" Grid.ColumnSpan="3" Grid.RowSpan="7">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">

@@ -86,13 +86,8 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
-                        Grid.RowSpan="4">
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type viewModel:StartUpViewModel}">
-                    <view:StartUpView/>
-                </DataTemplate>
-            </ContentControl.Resources>
-        </ContentControl>
+                        Grid.RowSpan="4"/>
+
     </Grid>
 
 </Window>

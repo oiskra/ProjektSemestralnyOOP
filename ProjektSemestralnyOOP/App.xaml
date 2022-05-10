@@ -10,6 +10,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/PasswordBoxRound.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:StartUpViewModel}">
+                <view:StartUpView/>
+            </DataTemplate>
         </ResourceDictionary>
         
 
