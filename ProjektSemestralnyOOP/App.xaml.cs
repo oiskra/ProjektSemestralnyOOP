@@ -1,5 +1,6 @@
 ﻿using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.MVVM.Model;
+using ProjektSemestralnyOOP.MVVM.ViewModel;
 using ProjektSemestralnyOOP.Services;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace ProjektSemestralnyOOP
     /// </summary>
     public partial class App : Application
     {
-
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+        }
     }
 }

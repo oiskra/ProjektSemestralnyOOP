@@ -1,5 +1,4 @@
-﻿using ProjektSemestralnyOOP.MVVM.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjektSemestralnyOOP
+namespace ProjektSemestralnyOOP.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy StartUpView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StartUpView : UserControl
     {
-        public MainWindow()
+        public StartUpView()
         {
             InitializeComponent();
         }

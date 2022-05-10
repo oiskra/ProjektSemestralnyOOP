@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektSemestralnyOOP"
+        xmlns:viewModel ="clr-namespace:ProjektSemestralnyOOP.MVVM.ViewModel"
+        xmlns:view ="clr-namespace:ProjektSemestralnyOOP.MVVM.View" 
         mc:Ignorable="d"
         Title="Aplikacja" 
         Height="600" Width="1000"
-        ResizeMode="NoResize"
-        Background="#001334">
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,7 +28,7 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Width="1000" Height="600" Grid.ColumnSpan="4" Grid.RowSpan="4" Margin="0,0,0,-16">
+        <Rectangle Width="1000" Height="600" Grid.ColumnSpan="3" Grid.RowSpan="7">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#001340" Offset="0.0" />
@@ -35,11 +39,20 @@
         </Rectangle>
 
         <TextBlock Text="RACING"
+                   Width="200"
+                   Height="55"
                    Foreground="White"
-                   FontSize="70"
+                   FontSize="60"
                    FontFamily="Segoe UI Light"
                    VerticalAlignment="Center"
-                   Margin="8 18 0 0"/>
+                   TextAlignment="Center"/>
+
+        <Border Width="200"
+                Height="2"
+                Grid.Row="1"
+                Background="#ffffe0"
+                VerticalAlignment="Top"
+                Margin="5 2 0 0"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
 
@@ -60,39 +73,26 @@
             <Button Content="Challenge"/>
             <Button Content="Your Races"/>
         </StackPanel>
-        
+
         <TextBlock Text="Object Oriented Programming Project - Olaf Iskra"
-                   Foreground="White"
-                   Grid.Row="3"
-                   FontSize="18"
-                   TextWrapping="Wrap"
-                   FontFamily="Segoe UI Light"
-                   Margin="10 0 0 10"/>
-                   
-        
+                    Foreground="White"
+                    Grid.Row="3"
+                    FontSize="15"
+                    TextWrapping="Wrap"
+                    FontFamily="Segoe UI Light"
+                    Margin="10 0 5 10"/>
 
-        <StackPanel Grid.Column="3" Orientation="Horizontal">
-
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Width" Value="100"/>
-                    <Setter Property="Height" Value="25"/>
-                    <Setter Property="FontSize" Value="15"/>
-                    <Setter Property="FontFamily" Value="Segoe UI Light"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                </Style>
-            </StackPanel.Resources>
-
-            <Button Grid.Column="2" 
-                    Content="Login"/>
-
-            <Button Grid.Column="2"                 
-                    Content="Register"/>
-       
-        </StackPanel>
-
+        <ContentControl Content="{Binding CurrentView}"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Grid.RowSpan="4">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewModel:StartUpViewModel}">
+                    <view:StartUpView/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
     </Grid>
 
 </Window>
