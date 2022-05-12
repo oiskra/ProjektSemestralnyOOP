@@ -41,22 +41,22 @@ namespace ProjektSemestralnyOOP.Services
 
         public async Task<ICollection<User>> ReadAllAsync()
         {
-            var allUsers = await _context.Users.ToListAsync();
+            List<User> allUsers = await _context.Users.ToListAsync();
             return allUsers;
         }
 
         public async Task<User> ReadUserAsync(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             return user;
         }
 
         public async Task RegisterUserAsync(User user)
         {
-            var ifExists = await _context.Users.AnyAsync(x => x.Id == user.Id);
+            bool ifExists = await _context.Users.AnyAsync(x => x.Id == user.Id);
             if (!ifExists)
             {
-                var addedUser = await _context.Users.AddAsync(user);
+                await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
                 return;
             }
@@ -64,7 +64,7 @@ namespace ProjektSemestralnyOOP.Services
 
         public async Task UpdateUserAsync(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }

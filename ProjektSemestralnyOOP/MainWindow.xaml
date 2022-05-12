@@ -64,11 +64,12 @@
                 </Style>
             </StackPanel.Resources>
             <Button Content="Profile"
-                    Margin="0 50 0 0"/>
-            <Button Content="Market"/>
-            <Button Content="Your Cars"/>
-            <Button Content="Challenge"/>
-            <Button Content="Your Races"/>
+                    Margin="0 50 0 0"
+                    Command="{Binding ProfileButton}"/>
+            <Button Content="Market" Command="{Binding MarketButton}"/>
+            <Button Content="Your Cars" Command="{Binding YourCarsButton}"/>
+            <Button Content="Challenge" Command="{Binding ChallegeButton}"/>
+            <Button Content="Your Races" Command="{Binding YourRacesButton}"/>
         </StackPanel>
 
         <TextBlock Text="Object Oriented Programming Project - Olaf Iskra"

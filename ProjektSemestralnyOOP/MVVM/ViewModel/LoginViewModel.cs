@@ -59,7 +59,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             IUserService service = new UserService(new RacingDBContextFactory());
             User loggedUser = await service.LoginUserAsync(Login, Password);
 
-            if (loggedUser is User) 
+            if (loggedUser is User)
             {
                 _mediator.LoginUser(loggedUser);
                 MessageBox.Show("True", "islogged?");
