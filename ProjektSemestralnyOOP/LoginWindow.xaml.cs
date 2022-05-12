@@ -23,7 +23,7 @@ namespace ProjektSemestralnyOOP
         public LoginWindow()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel(this);
+            //DataContext = new LoginViewModel(this);
         }
 
     }

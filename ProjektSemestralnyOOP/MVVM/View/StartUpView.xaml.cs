@@ -24,7 +24,6 @@ namespace ProjektSemestralnyOOP.MVVM.View
         public StartUpView()
         {
             InitializeComponent();
-            DataContext = new StartUpViewModel();
         }
     }
 }

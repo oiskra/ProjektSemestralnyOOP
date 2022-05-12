@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ProjektSemestralnyOOP"
              xmlns:viewModel ="clr-namespace:ProjektSemestralnyOOP.MVVM.ViewModel"
              xmlns:view ="clr-namespace:ProjektSemestralnyOOP.MVVM.View"
-             StartupUri="MainWindow.xaml">
+             Startup="OnStartup">
     <Application.Resources>
         <DataTemplate DataType="{x:Type viewModel:StartUpViewModel}">
             <view:StartUpView/>

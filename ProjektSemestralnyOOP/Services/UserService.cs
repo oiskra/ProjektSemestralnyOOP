@@ -29,14 +29,14 @@ namespace ProjektSemestralnyOOP.Services
             return true;
         }
 
-        public async Task<bool> LoginUserAsync(string login, string password)
+        public async Task<User> LoginUserAsync(string login, string password)
         {
             try
             {
                 User loggedUser = await _context.Users.FirstAsync(x => x.Login == login && x.Password == password);
-                return true;
+                return loggedUser;
             }
-            catch { return false; }
+            catch { return null; }
         }
 
         public async Task<ICollection<User>> ReadAllAsync()

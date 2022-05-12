@@ -4,6 +4,7 @@ using System.ComponentModel;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.Services;
 using System.Windows;
+using ProjektSemestralnyOOP.MVVM.Model;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
@@ -11,6 +12,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     {
 
         private object _currentView;
+        private User _loggedUser;
+        private readonly ViewModelMediator _mediator;
+
         public object CurrentView
         {
             get => _currentView;
@@ -23,10 +27,26 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         public StartUpViewModel StartUpVM { get; }
 
-        public MainViewModel()
+        public MainViewModel(ViewModelMediator mediator)
         {
-            StartUpVM = new StartUpViewModel();
+            LoginWindow loginWin = new();
+            RegisterWindow registerWin = new();
+
+            loginWin.DataContext = new LoginViewModel(loginWin, mediator);
+            registerWin.DataContext = new RegisterViewModel(registerWin);
+
+
+            StartUpVM = new StartUpViewModel(loginWin, registerWin);
             _currentView = StartUpVM;
+            _mediator = mediator;
+
+            _mediator.UserLogged += OnUserLogged;
+        }
+
+        private void OnUserLogged(User obj)
+        {
+            _loggedUser = obj;
+            MessageBox.Show(_loggedUser.Username, "test");
         }
     }
 }

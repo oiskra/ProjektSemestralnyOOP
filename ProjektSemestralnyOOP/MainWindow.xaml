@@ -10,9 +10,6 @@
         Title="Aplikacja" 
         Height="600" Width="1000"
         ResizeMode="NoResize">
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>

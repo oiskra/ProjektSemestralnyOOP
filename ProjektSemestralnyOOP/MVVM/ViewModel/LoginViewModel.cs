@@ -6,11 +6,13 @@ using ProjektSemestralnyOOP.Services;
 using ProjektSemestralnyOOP.DBcontext;
 using System.Threading.Tasks;
 using System.Windows;
+using ProjektSemestralnyOOP.MVVM.Model;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
     public class LoginViewModel : BaseViewModel
     {
+        private readonly ViewModelMediator _mediator;
         private string _login;
 
         public string Login
@@ -39,11 +41,12 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         public ICommand SubmitButton { get; }
         public ICommand CancelButton { get; }
 
-        public LoginViewModel(LoginWindow window)
+        public LoginViewModel(LoginWindow window, ViewModelMediator mediator)
         {
             SubmitButton = new RelayCommand(SubmitLoginCommand);
             CancelButton = new RelayCommand(CancelLoginCommand);
             Window = window;
+            _mediator = mediator;
         }
 
         private void CancelLoginCommand()
@@ -54,10 +57,11 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private async void SubmitLoginCommand()
         {
             IUserService service = new UserService(new RacingDBContextFactory());
-            bool isLogged = await service.LoginUserAsync(Login, Password);
+            User loggedUser = await service.LoginUserAsync(Login, Password);
 
-            if (isLogged) 
-            { 
+            if (loggedUser is User) 
+            {
+                _mediator.LoginUser(loggedUser);
                 MessageBox.Show("True", "islogged?");
                 Window.Close();
                 return;

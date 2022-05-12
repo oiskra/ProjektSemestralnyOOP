@@ -17,9 +17,15 @@ namespace ProjektSemestralnyOOP
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        protected void OnStartup(object sender, StartupEventArgs e)
         {
-            base.OnStartup(e);
+            //new mediatior
+            ViewModelMediator mediator = new();
+            MainWindow main = new MainWindow()
+            {
+                DataContext = new MainViewModel(mediator)
+            };
+            main.Show();
         }
     }
 }

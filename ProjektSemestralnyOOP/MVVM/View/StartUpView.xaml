@@ -5,11 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjektSemestralnyOOP.MVVM.View" 
-             xmlns:viewmodel="clr-namespace:ProjektSemestralnyOOP.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:StartUpViewModel}"
+             xmlns:viewmodel="clr-namespace:ProjektSemestralnyOOP.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="600" 
-             d:DesignWidth="1000"
-             DataContext="StartUpViewModel">
+             d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>

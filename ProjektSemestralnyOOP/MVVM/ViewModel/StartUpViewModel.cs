@@ -6,25 +6,24 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
     public class StartUpViewModel 
     {
+        private readonly LoginWindow _loginWindow;
+        private readonly RegisterWindow _registerWindow;
+
         public ICommand LoginButton { get; }
         public ICommand RegisterButton { get; }
 
-        public StartUpViewModel()
+        public StartUpViewModel(LoginWindow loginWindow, RegisterWindow registerWindow)
         {
             LoginButton = new RelayCommand(LoginCommand);
             RegisterButton = new RelayCommand(RegisterCommand);
+            _loginWindow = loginWindow;
+            _registerWindow = registerWindow;
         }
 
         private void RegisterCommand()
-        {
-            Window window = new RegisterWindow();
-            window.Show();
-        }
+            => _registerWindow.Show();
 
         private void LoginCommand()
-        {
-            Window window = new LoginWindow();
-            window.Show();
-        }
+            => _loginWindow.Show();
     }
 }
