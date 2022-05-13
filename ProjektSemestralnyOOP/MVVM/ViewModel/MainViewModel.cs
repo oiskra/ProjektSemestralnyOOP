@@ -48,7 +48,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private void YourRacesNavCommand()
         {
-            
+            throw new NotImplementedException();
         }
 
         private void ChallengeNavCommand()
@@ -67,9 +67,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private void ProfileNavCommand()
-        {
-            throw new NotImplementedException();
-        }
+            => CurrentView = new ProfileViewModel(_loggedUser);
 
         private void InitiateStartupView(ViewModelMediator mediator)
         {
