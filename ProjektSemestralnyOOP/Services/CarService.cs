@@ -22,10 +22,10 @@ namespace ProjektSemestralnyOOP.Services
 
         public async Task BuyCarAsync(int id, int userId)
         {
-            var ifExists = await _context.Market.AnyAsync(x => x.Id == id);
+            bool ifExists = await _context.Market.AnyAsync(x => x.Id == id);
             if(ifExists)
             {
-                var car = await _context.Market.SingleAsync(x => x.Id == id);
+                Car car = await _context.Market.SingleAsync(x => x.Id == id);
                 if (car.IsAvailable == false) return;
                 car.IsAvailable = false;
                 car.UserId = userId;
@@ -39,15 +39,15 @@ namespace ProjektSemestralnyOOP.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICollection<Car>> ReadCarsAsync(int userId)
+        public async Task<List<Car>> ReadCarsAsync(int userId)
         {
             var userCars = await _context.Market.Where(x => x.UserId == userId).ToListAsync();
             return userCars;
         }
 
-        public async Task<ICollection<Car>> ReadMarketAsync()
+        public List<Car> ReadMarketAsync()
         {
-            var market = await _context.Market.ToListAsync();
+            var market = _context.Market.ToList();
             return market;
         }
 
@@ -57,7 +57,7 @@ namespace ProjektSemestralnyOOP.Services
             if (ifExists)
             {
                 var car = await _context.Market.SingleAsync(x => x.Id == id);
-                if (car.IsAvailable == true && car.UserId == userId) return;
+                if (car.IsAvailable && car.UserId == userId) return;
                 car.IsAvailable = true;
                 car.UserId = null;
                 await _context.SaveChangesAsync();

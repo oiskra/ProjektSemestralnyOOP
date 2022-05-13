@@ -11,6 +11,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     {
         private readonly User _loggedUser;
 
+        public string Id => _loggedUser.Id.ToString();
         public string Username => _loggedUser.Username;
         public string Login => _loggedUser.Login;
         public string Password => _loggedUser.Password;

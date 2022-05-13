@@ -14,6 +14,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private User _loggedUser;
         private ViewModelMediator _mediator;
         private StartUpViewModel _startUpVM;
+        private ProfileViewModel _profileVM;
+        private MarketViewModel _marketVM;
 
         private object _currentView;
         public object CurrentView
@@ -35,15 +37,15 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         public MainViewModel(ViewModelMediator mediator)
         {
             ProfileButton = new RelayCommand(ProfileNavCommand);
-            MarketButton = new RelayCommand(MarketeNavCommand);
+            MarketButton = new RelayCommand(MarketNavCommand);
             YourCarsButton = new RelayCommand(YourCarsNavCommand);
             ChallegeButton = new RelayCommand(ChallengeNavCommand);
             YourRacesButton = new RelayCommand(YourRacesNavCommand);
 
 
-
-            InitiateStartupView(mediator);
+            _mediator = mediator;
             _mediator.UserLogged += OnUserLogged;
+            InitiateStartupView();
         }
 
         private void YourRacesNavCommand()
@@ -61,24 +63,21 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             throw new NotImplementedException();
         }
 
-        private void MarketeNavCommand()
-        {
-            throw new NotImplementedException();
-        }
+        private void MarketNavCommand()
+            => CurrentView = new MarketViewModel(_loggedUser);
 
         private void ProfileNavCommand()
             => CurrentView = new ProfileViewModel(_loggedUser);
 
-        private void InitiateStartupView(ViewModelMediator mediator)
+        private void InitiateStartupView()
         {
             LoginWindow loginWin = new();
             RegisterWindow registerWin = new();
-            loginWin.DataContext = new LoginViewModel(loginWin, mediator);
+            loginWin.DataContext = new LoginViewModel(loginWin, _mediator);
             registerWin.DataContext = new RegisterViewModel(registerWin);
 
             _startUpVM = new StartUpViewModel(loginWin, registerWin);
             _currentView = _startUpVM;
-            _mediator = mediator;
         }
 
         private void OnUserLogged(User obj)

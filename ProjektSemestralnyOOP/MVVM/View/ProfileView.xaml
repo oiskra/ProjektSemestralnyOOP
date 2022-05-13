@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjektSemestralnyOOP.MVVM.View"
+             xmlns:viewModel="clr-namespace:ProjektSemestralnyOOP.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
     <Grid>
@@ -40,6 +41,18 @@
                            Background="#100e31"
                            TextAlignment="Center"
                            Margin="0 40 0 28"/>
+
+                <StackPanel Orientation="Vertical" 
+                            Width="200" 
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="UserID:" TextDecorations="Underline"/>
+                    <TextBlock Text="{Binding Id}" 
+                               Background="#100e31"
+                               Opacity=".8"
+                               TextAlignment="Right" 
+                               FontSize="20" 
+                               Padding="0 5 10 5"/>
+                </StackPanel>
 
                 <StackPanel Orientation="Vertical" 
                             Width="200" 
@@ -97,17 +110,7 @@
                                Padding="0 5 10 5"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Vertical" 
-                            Width="200" 
-                            HorizontalAlignment="Center">
-                    <TextBlock Text="Owned Cars:" TextDecorations="Underline"/>
-                    <TextBlock Text="{Binding OwnedCars}" 
-                               Background="#100e31"
-                               Opacity=".8"
-                               TextAlignment="Right" 
-                               FontSize="20" 
-                               Padding="0 5 10 5"/>
-                </StackPanel>
+                
 
             </StackPanel>
 
