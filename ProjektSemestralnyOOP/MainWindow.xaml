@@ -59,8 +59,30 @@
                     <Setter Property="Height" Value="60"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
                     <Setter Property="FontFamily" Value="Segoe UI Light"/>
-                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="FontSize" Value="17"/>
                     <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter Content="{TemplateBinding Content}"
+                                                      HorizontalAlignment="Center" 
+                                                      VerticalAlignment="Center" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#100e31"/>
+                            <Setter Property="Foreground" Value="SlateGray"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#100e3a"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </StackPanel.Resources>
             <Button Content="Profile"
@@ -68,8 +90,8 @@
                     Command="{Binding ProfileButton}"/>
             <Button Content="Market" Command="{Binding MarketButton}"/>
             <Button Content="Your Cars" Command="{Binding YourCarsButton}"/>
-            <Button Content="Challenge" Command="{Binding ChallegeButton}"/>
-            <Button Content="Your Races" Command="{Binding YourRacesButton}"/>
+            <Button Content="Races" Command="{Binding YourRacesButton}"/>
+            <Button Content="Log Out" Command=""/>
         </StackPanel>
 
         <TextBlock Text="Object Oriented Programming Project - Olaf Iskra"

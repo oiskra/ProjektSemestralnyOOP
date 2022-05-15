@@ -24,17 +24,18 @@
                 </Image.Effect>
             </Image>
 
-            <StackPanel Margin="20 0 0 0">
+            <StackPanel Margin="20 60 0 0">
+
                 <TextBlock Text="YOUR CARS" 
                            Width="290"
                            TextAlignment="Center"
-                           Margin="0 60 0 20"
                            Padding="0 0 0 5"
+                           Margin="0 0 0 25"
                            Background="#fffa" 
                            Foreground="Black"
                            FontSize="42"
                            FontFamily="Segoe UI Light"/>
-                
+
                 <Border Width="290"
                         Height="340"
                         Background="#100e31"
@@ -51,7 +52,7 @@
                             Background="Transparent" 
                             BorderThickness="0">
                     <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
+                        <Style TargetType="{x:Type ListViewItem}">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                             <Setter Property="FontFamily" Value="Segoe UI Light"/>
                             <Setter Property="Background" Value="Transparent"/>
@@ -123,7 +124,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -132,7 +133,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        
+
                         <TextBlock Text="Brand:"
                                    TextAlignment="Center"
                                    Foreground="White"

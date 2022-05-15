@@ -34,16 +34,14 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         public ICommand ProfileButton { get; }
         public ICommand MarketButton { get; }
         public ICommand YourCarsButton { get; }
-        public ICommand ChallegeButton { get; }
         public ICommand YourRacesButton { get; }
 
         public MainViewModel(ViewModelMediator mediator)
         {
-            ProfileButton = new RelayCommand(ProfileNavCommand);
-            MarketButton = new RelayCommand(MarketNavCommand);
-            YourCarsButton = new RelayCommand(YourCarsNavCommand);
-            ChallegeButton = new RelayCommand(ChallengeNavCommand);
-            YourRacesButton = new RelayCommand(YourRacesNavCommand);
+            ProfileButton = new RelayCommand(ProfileNavCommand, x => _loggedUser != null);
+            MarketButton = new RelayCommand(MarketNavCommand, x => _loggedUser != null);
+            YourCarsButton = new RelayCommand(YourCarsNavCommand, x => _loggedUser != null);
+            YourRacesButton = new RelayCommand(YourRacesNavCommand, x => _loggedUser != null);
 
 
             _mediator = mediator;
@@ -53,11 +51,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private void YourRacesNavCommand()
             => CurrentView = _yourCarsVm;
-
-        private void ChallengeNavCommand()
-        {
-            throw new NotImplementedException();
-        }
 
         private void YourCarsNavCommand()
         {
