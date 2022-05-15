@@ -17,7 +17,10 @@
         <DataTemplate DataType="{x:Type viewModel:MarketViewModel}">
             <view:MarketView/>
         </DataTemplate>
-
+        
+        <DataTemplate DataType="{x:Type viewModel:YourCarsViewModel}">
+            <view:YourCarsView/>
+        </DataTemplate>
 
 
 

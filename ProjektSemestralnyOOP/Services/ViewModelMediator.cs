@@ -10,9 +10,15 @@ namespace ProjektSemestralnyOOP.Services
     public class ViewModelMediator
     {
         public event Action<User> UserLogged;
+        public event Action<List<Car>> YourCarsUpdated;
         public void LoginUser(User user)
         {
             UserLogged?.Invoke(user);
+        }
+
+        public void UpdateYourCars(List<Car> list)
+        {
+            YourCarsUpdated?.Invoke(list);
         }
     }
 }

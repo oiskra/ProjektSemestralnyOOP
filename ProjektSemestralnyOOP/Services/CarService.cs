@@ -39,24 +39,24 @@ namespace ProjektSemestralnyOOP.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Car>> ReadCarsAsync(int userId)
+        public List<Car> ReadCarsAsync(int userId)
         {
-            var userCars = await _context.Market.Where(x => x.UserId == userId).ToListAsync();
+            List<Car> userCars = _context.Market.Where(x => x.UserId == userId).ToList();
             return userCars;
         }
 
         public List<Car> ReadMarketAsync()
         {
-            var market = _context.Market.ToList();
+            List<Car> market = _context.Market.ToList();
             return market;
         }
 
         public async Task SellCarAsync(int id, int userId)
         {
-            var ifExists = await _context.Market.AnyAsync(x => x.Id == id);
+            bool ifExists = await _context.Market.AnyAsync(x => x.Id == id);
             if (ifExists)
             {
-                var car = await _context.Market.SingleAsync(x => x.Id == id);
+                Car car = await _context.Market.SingleAsync(x => x.Id == id);
                 if (car.IsAvailable && car.UserId == userId) return;
                 car.IsAvailable = true;
                 car.UserId = null;

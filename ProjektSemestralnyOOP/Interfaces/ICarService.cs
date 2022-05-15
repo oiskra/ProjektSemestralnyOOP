@@ -9,7 +9,7 @@ namespace ProjektSemestralnyOOP.Interfaces
     public interface ICarService
     {
         Task CreateCarAsync(Car entity);
-        Task<List<Car>> ReadCarsAsync(int userId);
+        List<Car> ReadCarsAsync(int userId);
         List<Car> ReadMarketAsync();
         Task BuyCarAsync(int id, int userId);
         Task SellCarAsync(int id, int userId);

@@ -21,9 +21,53 @@ namespace ProjektSemestralnyOOP.Services
             _context = context.CreateDbContext();
         }
 
-        public async Task CreateRaceAsync(Race entity)
+        public async Task CreateRaceAsync(string loggedUsername, string challengedUsername, Car loggedUserCar)
         {
-            await _context.Races.AddAsync(entity);
+            User loggedUser = await _context.Users.Where(x => x.Username == loggedUsername).FirstOrDefaultAsync();
+            User challengedUser = await _context.Users.Where(x => x.Username == challengedUsername).FirstOrDefaultAsync();
+            List<Car> challengedCarList = await _context.Market
+                .Where(x => x.UserId == challengedUser.Id)
+                .ToListAsync();
+            
+            int rand = new Random().Next(0, challengedCarList.Count);
+            var challengedCarStats = challengedCarList[rand].Statistics;
+
+            int statsOne = loggedUserCar.Statistics.Speed + 
+                        loggedUserCar.Statistics.Acceleration + 
+                        loggedUserCar.Statistics.Grip + 
+                        loggedUserCar.Statistics.Braking;
+            
+            int statsTwo = challengedCarStats.Acceleration + 
+                        challengedCarStats.Braking + 
+                        challengedCarStats.Grip + 
+                        challengedCarStats.Speed;
+
+            string winner;
+            if (statsOne == statsTwo)
+            {
+                winner = "draw";
+                loggedUser.Money += 250;
+                challengedUser.Money += 250;
+            }
+            else
+            {
+                winner = statsOne > statsTwo ? loggedUsername : challengedUsername;
+                if (winner == loggedUsername)
+                    loggedUser.Money += 500;
+                else
+                    challengedUser.Money += 500;
+            }
+
+            Race newRace = new Race
+            {
+                RacerOne = loggedUsername,
+                RacerTwo = challengedUsername,
+                CarOne = $"{loggedUserCar.Brand} {loggedUserCar.Model}",
+                CarTwo = $"",
+                Winner = winner
+            };
+
+            await _context.Races.AddAsync(newRace);
             await _context.SaveChangesAsync();
         }
 

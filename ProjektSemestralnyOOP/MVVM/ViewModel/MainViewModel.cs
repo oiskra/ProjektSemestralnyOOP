@@ -6,15 +6,18 @@ using ProjektSemestralnyOOP.Services;
 using System.Windows;
 using ProjektSemestralnyOOP.MVVM.Model;
 using System.Windows.Input;
+using ProjektSemestralnyOOP.DBcontext;
+using System.Collections.Generic;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
         private User _loggedUser;
-        private ViewModelMediator _mediator;
+        private readonly ViewModelMediator _mediator;
         private StartUpViewModel _startUpVM;
         private ProfileViewModel _profileVM;
+        private YourCarsViewModel _yourCarsVm;
         private MarketViewModel _marketVM;
 
         private object _currentView;
@@ -49,9 +52,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private void YourRacesNavCommand()
-        {
-            throw new NotImplementedException();
-        }
+            => CurrentView = _yourCarsVm;
 
         private void ChallengeNavCommand()
         {
@@ -60,14 +61,17 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private void YourCarsNavCommand()
         {
-            throw new NotImplementedException();
+            ICarService service = new CarService(new RacingDBContextFactory());
+            List<Car> list = service.ReadCarsAsync(_loggedUser.Id);
+            _mediator.UpdateYourCars(list);
+            CurrentView = _yourCarsVm;
         }
 
         private void MarketNavCommand()
-            => CurrentView = new MarketViewModel(_loggedUser);
+            => CurrentView = _marketVM;
 
         private void ProfileNavCommand()
-            => CurrentView = new ProfileViewModel(_loggedUser);
+            => CurrentView = _profileVM;
 
         private void InitiateStartupView()
         {
@@ -83,7 +87,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private void OnUserLogged(User obj)
         {
             _loggedUser = obj;
-            MessageBox.Show(_loggedUser.Username, "test");
+            _marketVM = new MarketViewModel(_loggedUser);
+            _profileVM = new ProfileViewModel(_loggedUser);
+            _yourCarsVm = new YourCarsViewModel(_loggedUser, _mediator);
         }
     }
 }
