@@ -78,7 +78,10 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             };
             
             await service.RegisterUserAsync(newUser);
-            Window.Close();
+            Window.Hide();
+            Username = null;
+            Login = null;
+            Password = null;
         }
     }
 }

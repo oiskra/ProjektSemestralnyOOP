@@ -51,7 +51,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private void CancelLoginCommand()
         {
-            Window.Close();
+            Window.Hide();
         }
 
         private async void SubmitLoginCommand()
@@ -63,7 +63,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             {
                 _mediator.LoginUser(loggedUser);
                 MessageBox.Show("True", "islogged?");
-                Window.Close();
+                Window.Hide();
+                Password = null;
+                Login = null;
                 return;
             }
 
