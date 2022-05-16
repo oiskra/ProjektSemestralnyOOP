@@ -17,7 +17,149 @@
                 <BlurEffect Radius="20"/>
             </Image.Effect>
         </Image>
+
+        <Grid Grid.Column="1" >
+            <Image Source="/Images/car.jpg" Grid.ColumnSpan="2" Stretch="UniformToFill">
+                <Image.Effect>
+                    <BlurEffect Radius="20"/>
+                </Image.Effect>
+            </Image>
+
+            <StackPanel Width="610">
+                <TextBlock Text="RACES" 
+                           Width="200"
+                           TextAlignment="Center"
+                           Margin="0 30 0 20"
+                           Padding="0 0 0 5"
+                           Background="#fffa" 
+                           Foreground="Black"
+                           FontSize="45"
+                           FontFamily="Segoe UI Light"/>
+
+                <ListView ItemsSource="{Binding Races}" 
+                          FontFamily="Segoe UI Light" 
+                          Foreground="White" 
+                          Margin="19 0 19 0" 
+                          Padding="2 0 2 0"
+                          Width="580"
+                          Height="350" 
+                          Background="Transparent" 
+                          BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+                            <Setter Property="Background" Value="#100e31"/>
+                            <Setter Property="Opacity" Value=".8"/>
+                            <Setter Property="Margin" Value="0 2 0 2"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Background" Value="#100e31"/>
+                                    <Setter Property="BorderBrush" Value="#100e31"/>
+                                    <Setter Property="Foreground" Value="white"/>
+                                    <Setter Property="Margin" Value="0 0 0 2"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Header="Race ID" Width="70">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" 
+                                                   Padding="0 5 0 5" 
+                                                   Text="{Binding Id}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Racer One" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding RacerOne}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Car One" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CarOne}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Racer Two" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding RacerTwo}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Car Two" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CarTwo}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Winner" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Winner}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal" Margin="0 30 0 0" HorizontalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#100e31"/>
+                            <Setter Property="BorderBrush" Value="#100e31"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+                            <Setter Property="FontSize" Value="25"/>
+                            <Setter Property="Padding" Value="20 2 20 2"/>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="10" ShadowDepth="2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Margin="0 0 10 0" 
+                            Content="See All" 
+                            Command="{Binding SeeAllButton}"
+                            Background="#ffe987">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button Margin="10 0 0 0" 
+                            Content="See Yours" 
+                            Command="{Binding SeeYoursButton}"
+                            Background="#b3408f">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+
     </Grid>
-    
-    
+
 </UserControl>

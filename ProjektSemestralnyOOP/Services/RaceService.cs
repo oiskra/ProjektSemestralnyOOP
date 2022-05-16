@@ -28,19 +28,20 @@ namespace ProjektSemestralnyOOP.Services
             List<Car> challengedCarList = await _context.Market
                 .Where(x => x.UserId == challengedUser.Id)
                 .ToListAsync();
-            
+
+            if (challengedCarList.Count == 0) return;
             int rand = new Random().Next(0, challengedCarList.Count);
-            var challengedCarStats = challengedCarList[rand].Statistics;
+            Car challengedCar = challengedCarList[rand];
 
             int statsOne = loggedUserCar.Statistics.Speed + 
                         loggedUserCar.Statistics.Acceleration + 
                         loggedUserCar.Statistics.Grip + 
                         loggedUserCar.Statistics.Braking;
             
-            int statsTwo = challengedCarStats.Acceleration + 
-                        challengedCarStats.Braking + 
-                        challengedCarStats.Grip + 
-                        challengedCarStats.Speed;
+            int statsTwo = challengedCar.Statistics.Acceleration + 
+                        challengedCar.Statistics.Braking + 
+                        challengedCar.Statistics.Grip + 
+                        challengedCar.Statistics.Speed;
 
             string winner;
             if (statsOne == statsTwo)
@@ -58,12 +59,12 @@ namespace ProjektSemestralnyOOP.Services
                     challengedUser.Money += 500;
             }
 
-            Race newRace = new Race
+            Race newRace = new()
             {
                 RacerOne = loggedUsername,
                 RacerTwo = challengedUsername,
                 CarOne = $"{loggedUserCar.Brand} {loggedUserCar.Model}",
-                CarTwo = $"",
+                CarTwo = $"{challengedCar.Brand} {challengedCar.Model}",
                 Winner = winner
             };
 
@@ -71,13 +72,13 @@ namespace ProjektSemestralnyOOP.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICollection<Race>> ReadAllRaces()
+        public async Task<List<Race>> ReadAllRacesAsync()
         {
-            var races = await _context.Races.ToListAsync();
+            List<Race> races = await _context.Races.ToListAsync();
             return races;
         }
 
-        public async Task<ICollection<Race>> ReadRaceAsync(int id)
+        public async Task<List<Race>> ReadRaceAsync(int id)
         {
             var user = await _context.Users.FirstAsync(x => x.Id == id);
             var userRaces = await  _context.Races.Where(x => x.RacerOne == user.Username || x.RacerTwo == user.Username).ToListAsync();

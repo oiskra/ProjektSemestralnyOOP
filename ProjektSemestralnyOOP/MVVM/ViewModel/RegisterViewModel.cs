@@ -63,7 +63,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private void CancelRegisterCommand()
         {
-            Window.Close();
+            Window.Hide();
         }
 
         private async void SubmitRegisterCommand()
@@ -74,7 +74,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 Username = this.Username,
                 Login = this.Login,
                 Password = this.Password,
-                Money = 1000
+                Money = 1000,
+                Cars = new List<Car>()
             };
             
             await service.RegisterUserAsync(newUser);

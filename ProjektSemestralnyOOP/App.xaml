@@ -22,8 +22,8 @@
             <view:YourCarsView/>
         </DataTemplate>
 
-
-
-
+        <DataTemplate DataType="{x:Type viewModel:RacesViewModel}">
+            <view:RacesView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

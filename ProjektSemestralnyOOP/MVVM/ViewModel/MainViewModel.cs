@@ -17,8 +17,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private readonly ViewModelMediator _mediator;
         private StartUpViewModel _startUpVM;
         private ProfileViewModel _profileVM;
-        private YourCarsViewModel _yourCarsVm;
+        private YourCarsViewModel _yourCarsVM;
         private MarketViewModel _marketVM;
+        private RacesViewModel _racesVM;
 
         private object _currentView;
         public object CurrentView
@@ -34,7 +35,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         public ICommand ProfileButton { get; }
         public ICommand MarketButton { get; }
         public ICommand YourCarsButton { get; }
-        public ICommand YourRacesButton { get; }
+        public ICommand RacesButton { get; }
         public ICommand LogOutButton { get; }
 
         public MainViewModel(ViewModelMediator mediator)
@@ -42,7 +43,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             ProfileButton = new RelayCommand(ProfileNavCommand, x => _loggedUser != null);
             MarketButton = new RelayCommand(MarketNavCommand, x => _loggedUser != null);
             YourCarsButton = new RelayCommand(YourCarsNavCommand, x => _loggedUser != null);
-            YourRacesButton = new RelayCommand(YourRacesNavCommand, x => _loggedUser != null);
+            RacesButton = new RelayCommand(RacesNavCommand, x => _loggedUser != null);
             LogOutButton = new RelayCommand(LogOutCommand, x => _loggedUser != null);
 
 
@@ -54,18 +55,19 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private void LogOutCommand()
         {
             _loggedUser = null;
+            _mediator.LogOutUser();
             CurrentView = _startUpVM;
         }
 
-        private void YourRacesNavCommand()
-            => CurrentView = _yourCarsVm;
+        private void RacesNavCommand()
+            => CurrentView = _racesVM;
 
         private void YourCarsNavCommand()
         {
             ICarService service = new CarService(new RacingDBContextFactory());
             List<Car> list = service.ReadCarsAsync(_loggedUser.Id);
             _mediator.UpdateYourCars(list);
-            CurrentView = _yourCarsVm;
+            CurrentView = _yourCarsVM;
         }
 
         private void MarketNavCommand()
@@ -81,7 +83,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             loginWin.DataContext = new LoginViewModel(loginWin, _mediator);
             registerWin.DataContext = new RegisterViewModel(registerWin);
 
-            _startUpVM = new StartUpViewModel(loginWin, registerWin);
+            _startUpVM = new StartUpViewModel(loginWin, registerWin, _mediator);
             _currentView = _startUpVM;
         }
 
@@ -90,7 +92,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             _loggedUser = obj;
             _marketVM = new MarketViewModel(_loggedUser);
             _profileVM = new ProfileViewModel(_loggedUser);
-            _yourCarsVm = new YourCarsViewModel(_loggedUser, _mediator);
+            _yourCarsVM = new YourCarsViewModel(_loggedUser, _mediator);
+            _racesVM = new RacesViewModel(_loggedUser);
         }
     }
 }

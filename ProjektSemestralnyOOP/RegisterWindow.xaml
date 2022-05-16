@@ -10,6 +10,7 @@
         Width="350"
         ResizeMode="NoResize"
         Background="#001334"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen">
 
     <Grid>
@@ -105,6 +106,7 @@
                     Width="175"
                     Margin="0 30 0 0"
                     Background="#0f004a"
+                    Cursor="Hand"
                     Content="SIGN UP"
                     Foreground="White"
                     BorderBrush="Black"
@@ -119,6 +121,7 @@
                     Width="175"
                     Margin="0 10 0 0"
                     Background="#0f004a"
+                    Cursor="Hand"
                     Content="CANCEL"
                     Foreground="White"
                     BorderBrush="Black"

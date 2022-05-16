@@ -11,6 +11,7 @@ namespace ProjektSemestralnyOOP.Services
     {
         public event Action<User> UserLogged;
         public event Action<List<Car>> YourCarsUpdated;
+        public event Action UserLoggedOut;
         public void LoginUser(User user)
         {
             UserLogged?.Invoke(user);
@@ -19,6 +20,11 @@ namespace ProjektSemestralnyOOP.Services
         public void UpdateYourCars(List<Car> list)
         {
             YourCarsUpdated?.Invoke(list);
+        }
+
+        public void LogOutUser()
+        {
+            UserLoggedOut?.Invoke();
         }
     }
 }

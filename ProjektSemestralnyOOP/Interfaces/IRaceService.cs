@@ -8,7 +8,7 @@ namespace ProjektSemestralnyOOP.Interfaces
     public interface IRaceService
     {
         Task CreateRaceAsync(string loggedUsername, string challengedUsername, Car loggedUserCar);
-        Task<ICollection<Race>> ReadRaceAsync(int id);
-        Task<ICollection<Race>> ReadAllRaces();
+        Task<List<Race>> ReadRaceAsync(int id);
+        Task<List<Race>> ReadAllRacesAsync();
     }
 }
