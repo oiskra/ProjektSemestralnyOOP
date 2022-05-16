@@ -31,21 +31,29 @@
                         <Setter Property="Foreground" Value="White"/>
                         <Setter Property="Width" Value="200"/>
                         <Setter Property="FontSize" Value="15"/>
-                        <Setter Property="Margin" Value="0 0 0 7"/>
+                        <Setter Property="Margin" Value="0 0 0 15"/>
                     </Style>
                 </StackPanel.Resources>
 
                 <TextBlock Text="PROFILE"
                            Width="200"
                            FontSize="50"
-                           Background="#100e31"
+                           Background="#fffa"
+                           Foreground="Black"
                            TextAlignment="Center"
                            Margin="0 40 0 28"/>
 
-                <StackPanel Orientation="Vertical" 
-                            Width="200" 
-                            HorizontalAlignment="Center">
-                    <TextBlock Text="UserID:" TextDecorations="Underline"/>
+                <StackPanel Width="200"
+                            Orientation="Vertical">
+
+                    <TextBlock Text="UserID:" 
+                               Background="#fffa" 
+                               Foreground="Black"
+                               Width="50"
+                               Padding="3 2 3 2"
+                               Margin="-160 0 0 -10" 
+                               Panel.ZIndex="1"/>
+
                     <TextBlock Text="{Binding Id}" 
                                Background="#100e31"
                                Opacity=".8"
@@ -57,7 +65,13 @@
                 <StackPanel Orientation="Vertical" 
                             Width="200" 
                             HorizontalAlignment="Center">
-                    <TextBlock Text="Username:" TextDecorations="Underline"/>
+                    <TextBlock Text="Username:" 
+                               Background="#fffa" 
+                               Foreground="Black"
+                               Width="75"
+                               Padding="3 2 3 2"
+                               Margin="-135 0 0 -10" 
+                               Panel.ZIndex="1"/>
                     <TextBlock Text="{Binding Username}"
                                Background="#100e31"
                                Opacity=".8"
@@ -70,7 +84,13 @@
                 <StackPanel Orientation="Vertical"
                             Width="200" 
                             HorizontalAlignment="Center">
-                    <TextBlock Text="Login:" TextDecorations="Underline"/>
+                    <TextBlock Text="Login:" 
+                               Background="#fffa" 
+                               Foreground="Black"
+                               Width="45"
+                               Padding="3 2 3 2"
+                               Margin="-165 0 0 -10" 
+                               Panel.ZIndex="1"/>
                     <TextBlock Text="{Binding Login}" 
                                Background="#100e31"
                                Opacity=".8"
@@ -88,7 +108,13 @@
                 <StackPanel Orientation="Vertical" 
                             Width="200" 
                             HorizontalAlignment="Center">
-                    <TextBlock Text="Password:"  TextDecorations="Underline" VerticalAlignment="Center"/>
+                    <TextBlock Text="Password:" 
+                               Background="#fffa" 
+                               Foreground="Black"
+                               Width="70"
+                               Padding="3 2 3 2"
+                               Margin="-140 0 0 -10" 
+                               Panel.ZIndex="1"/>
                     <TextBlock Text="{Binding Password}" 
                                Background="#100e31" 
                                Opacity=".8"
@@ -101,7 +127,13 @@
                 <StackPanel Orientation="Vertical" 
                             Width="200" 
                             HorizontalAlignment="Center">
-                    <TextBlock Text="Money:" TextDecorations="Underline"/>
+                    <TextBlock Text="Money:" 
+                               Background="#fffa" 
+                               Foreground="Black"
+                               Width="55"
+                               Padding="3 2 3 2"
+                               Margin="-155 0 0 -10" 
+                               Panel.ZIndex="1"/>
                     <TextBlock Text="{Binding Money}" 
                                Background="#100e31"
                                Opacity=".8"
@@ -110,7 +142,7 @@
                                Padding="0 5 10 5"/>
                 </StackPanel>
 
-                
+
 
             </StackPanel>
 
@@ -136,7 +168,8 @@
                 <TextBlock Text="UPDATE"
                            Width="200"
                            FontSize="50"
-                           Background="#100e31"
+                           Background="#fffa"
+                           Foreground="Black"
                            TextAlignment="Center"
                            Margin="0 40 0 20"/>
 

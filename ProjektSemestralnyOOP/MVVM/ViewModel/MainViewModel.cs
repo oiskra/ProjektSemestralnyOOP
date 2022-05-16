@@ -35,6 +35,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         public ICommand MarketButton { get; }
         public ICommand YourCarsButton { get; }
         public ICommand YourRacesButton { get; }
+        public ICommand LogOutButton { get; }
 
         public MainViewModel(ViewModelMediator mediator)
         {
@@ -42,11 +43,18 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             MarketButton = new RelayCommand(MarketNavCommand, x => _loggedUser != null);
             YourCarsButton = new RelayCommand(YourCarsNavCommand, x => _loggedUser != null);
             YourRacesButton = new RelayCommand(YourRacesNavCommand, x => _loggedUser != null);
+            LogOutButton = new RelayCommand(LogOutCommand, x => _loggedUser != null);
 
 
             _mediator = mediator;
             _mediator.UserLogged += OnUserLogged;
             InitiateStartupView();
+        }
+
+        private void LogOutCommand()
+        {
+            _loggedUser = null;
+            CurrentView = _startUpVM;
         }
 
         private void YourRacesNavCommand()

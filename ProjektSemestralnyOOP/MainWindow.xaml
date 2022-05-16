@@ -91,7 +91,7 @@
             <Button Content="Market" Command="{Binding MarketButton}"/>
             <Button Content="Your Cars" Command="{Binding YourCarsButton}"/>
             <Button Content="Races" Command="{Binding YourRacesButton}"/>
-            <Button Content="Log Out" Command=""/>
+            <Button Content="Log Out" Command="{Binding LogOutButton}" Cursor="Hand"/>
         </StackPanel>
 
         <TextBlock Text="Object Oriented Programming Project - Olaf Iskra"

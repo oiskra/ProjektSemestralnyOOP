@@ -108,17 +108,19 @@
 
                 <Border Width="200"
                         Height="250"
-                        Background="#100e31"
                         BorderBrush="#fffa"
                         Padding="0 10 0 10"
                         BorderThickness="2"
-                        Opacity=".7"
                         Margin="0 70 0 0">
                     <Border.Resources>
                         <Style TargetType="TextBlock">
                             <Setter Property="FontFamily" Value="Segoe UI Light"/>
+                            <Setter Property="Panel.ZIndex" Value="1"/>
                         </Style>
                     </Border.Resources>
+                    <Border.Background>
+                        <SolidColorBrush Color="#100e31" Opacity="0.8"/>
+                    </Border.Background>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

@@ -67,6 +67,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private void OnYourCarsUpdated(List<Car> obj)
         {
             YourCars = new ObservableCollection<Car>(obj);
+            SelectedCar = null;
         }
 
         private void ChallegeCommand()
