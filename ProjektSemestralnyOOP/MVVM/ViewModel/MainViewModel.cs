@@ -31,6 +31,16 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 OnPropertyChanged(nameof(CurrentView));
             }
         }
+        private bool _showButton;
+        public bool ShowButton
+        {
+            get => _showButton; 
+            set
+            {
+                _showButton = value;
+                OnPropertyChanged(nameof(ShowButton));
+            }
+        }
 
         public ICommand ProfileButton { get; }
         public ICommand MarketButton { get; }
@@ -56,6 +66,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         {
             _loggedUser = null;
             _mediator.LogOutUser();
+            ShowButton = false;    
             CurrentView = _startUpVM;
         }
 
@@ -90,6 +101,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private void OnUserLogged(User obj)
         {
             _loggedUser = obj;
+            ShowButton = _loggedUser.Username == "admin" && _loggedUser.Login == "admin";
             _marketVM = new MarketViewModel(_loggedUser);
             _profileVM = new ProfileViewModel(_loggedUser);
             _yourCarsVM = new YourCarsViewModel(_loggedUser, _mediator);

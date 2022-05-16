@@ -10,7 +10,9 @@
         Title="Aplikacja" 
         Height="600" Width="1000"
         ResizeMode="NoResize">
-
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="Converter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -91,6 +93,7 @@
             <Button Content="Market" Command="{Binding MarketButton}"/>
             <Button Content="Your Cars" Command="{Binding YourCarsButton}"/>
             <Button Content="Races" Command="{Binding RacesButton}"/>
+            <Button Content="Admin Panel" Visibility="{Binding Path=ShowButton, Converter={StaticResource Converter}}"/>
             <Button Content="Log Out" Command="{Binding LogOutButton}"/>
         </StackPanel>
 
