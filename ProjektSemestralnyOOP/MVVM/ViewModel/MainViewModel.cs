@@ -79,16 +79,16 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private void RacesNavCommand()
             => CurrentView = _racesVM;
 
-        private void YourCarsNavCommand()
+        private async void YourCarsNavCommand()
         {
-            List<Car> list = _carService.ReadCarsAsync(_loggedUser.Id);
+            List<Car> list = await _carService.ReadCarsAsync(_loggedUser.Id);
             _mediator.UpdateYourCars(list);
             CurrentView = _yourCarsVM;
         }
 
-        private void MarketNavCommand()
+        private async void MarketNavCommand()
         {
-            List<Tuple<Car, Statistic>> list = _carService.ReadMarketAsync();
+            List<Tuple<Car, Statistic>> list = await _carService.ReadMarketAsync();
             _mediator.UpdateMarket(list);
             CurrentView = _marketVM;
         }

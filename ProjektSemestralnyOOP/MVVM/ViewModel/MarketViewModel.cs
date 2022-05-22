@@ -74,8 +74,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             AssignListFromDb();
         }
 
-        private void AssignListFromDb()
-            => MarketCars = new ObservableCollection<Tuple<Car, Statistic>>(_service.ReadMarketAsync());
-
+        private async void AssignListFromDb()
+            => MarketCars = new ObservableCollection<Tuple<Car, Statistic>>(await _service.ReadMarketAsync()); 
     }
 }

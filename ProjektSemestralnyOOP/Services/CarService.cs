@@ -22,17 +22,20 @@ namespace ProjektSemestralnyOOP.Services
             _context = context.CreateDbContext();
         }
 
-        public async Task BuyCarAsync(int id, int userId)
+        public async Task BuyCarAsync(int carId, int userId)
         {
-            bool ifExists = await _context.Market.AnyAsync(x => x.Id == id);
-            if(ifExists)
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            Car car = await _context.Market.SingleAsync(x => x.Id == carId);
+            if (car.IsAvailable == false) return;
+            if(car.Price > user.Money)
             {
-                Car car = await _context.Market.SingleAsync(x => x.Id == id);
-                if (car.IsAvailable == false) return;
-                car.IsAvailable = false;
-                car.UserId = userId;
-                await _context.SaveChangesAsync();
+                MessageBox.Show("You can\'t afford the car");
+                return;
             }
+            car.IsAvailable = false;
+            car.UserId = userId;
+            user.Money -= car.Price;
+            await _context.SaveChangesAsync();
         }
 
         public async Task CreateCarAsync(Car entity)
@@ -41,31 +44,34 @@ namespace ProjektSemestralnyOOP.Services
             await _context.SaveChangesAsync();
         }
 
-        public List<Car> ReadCarsAsync(int userId)
+        public async Task<List<Car>> ReadCarsAsync(int userId)
         {
-            List<Car> userCars = _context.Market.Where(x => x.UserId == userId).ToList();
+            List<Car> userCars = await _context.Market.Where(x => x.UserId == userId).ToListAsync();
             return userCars;
         }
 
-        public List<Tuple<Car, Statistic>> ReadMarketAsync()
+        public async Task<List<Tuple<Car, Statistic>>> ReadMarketAsync()
         {
             var market = from m in _context.Market
-                          join s in _context.Statistics
-                          on m.Id equals s.CarId
-                          select new Tuple<Car, Statistic>(m, s);
+                         join s in _context.Statistics
+                         on m.Id equals s.CarId
+                         select new Tuple<Car, Statistic>(m, s);
 
-            return market.ToList();
+            return await market.ToListAsync();
         }
 
-        public async Task SellCarAsync(int id, int userId)
+        public async Task SellCarAsync(int carId, int userId)
         {
             bool ifExists = await _context.Market.AnyAsync(x => x.Id == id);
             if (ifExists)
             {
-                Car car = await _context.Market.SingleAsync(x => x.Id == id);
-                if (car.IsAvailable && car.UserId == userId) return;
+                User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
+                Car car = await _context.Market.SingleAsync(x => x.Id == carId);
+                if (car.IsAvailable && car.UserId == userId)
+                    return;
                 car.IsAvailable = true;
                 car.UserId = null;
+                user.Money += car.Price;
                 await _context.SaveChangesAsync();
             }
         }
@@ -81,7 +87,6 @@ namespace ProjektSemestralnyOOP.Services
             {
                 MessageBox.Show(e.ToString());   
             }
-            
         }
     }
 }
