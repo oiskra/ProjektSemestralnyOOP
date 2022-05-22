@@ -1,4 +1,5 @@
 ﻿using ProjektSemestralnyOOP.MVVM.Model;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace ProjektSemestralnyOOP.Interfaces
     {
         Task CreateCarAsync(Car entity);
         List<Car> ReadCarsAsync(int userId);
-        List<Car> ReadMarketAsync();
+        List<Tuple<Car, Statistic>> ReadMarketAsync();
         Task BuyCarAsync(int id, int userId);
         Task SellCarAsync(int id, int userId);
         Task AddStatistic(Statistic entity);

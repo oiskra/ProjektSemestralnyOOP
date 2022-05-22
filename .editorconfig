@@ -2,3 +2,6 @@
 
 # IDE0058: Wartość wyrażenia nie jest nigdy używana.
 dotnet_diagnostic.IDE0058.severity = none
+
+# IDE0022: Użyj treści bloku dla metod
+csharp_style_expression_bodied_methods = when_on_single_line

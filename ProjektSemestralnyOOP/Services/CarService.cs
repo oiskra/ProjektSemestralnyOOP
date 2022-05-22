@@ -47,10 +47,14 @@ namespace ProjektSemestralnyOOP.Services
             return userCars;
         }
 
-        public List<Car> ReadMarketAsync()
+        public List<Tuple<Car, Statistic>> ReadMarketAsync()
         {
-            List<Car> market = _context.Market.ToList();
-            return market;
+            var market = from m in _context.Market
+                          join s in _context.Statistics
+                          on m.Id equals s.CarId
+                          select new Tuple<Car, Statistic>(m, s);
+
+            return market.ToList();
         }
 
         public async Task SellCarAsync(int id, int userId)
@@ -75,7 +79,7 @@ namespace ProjektSemestralnyOOP.Services
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message);   
+                MessageBox.Show(e.ToString());   
             }
             
         }

@@ -153,6 +153,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
                 await _carService.CreateCarAsync(newCar);
                 await _carService.AddStatistic(newStatistic);
+                MessageBox.Show("Car created successfully", "Info");
+
             }
             catch (FormatException)
             {

@@ -11,7 +11,7 @@ namespace ProjektSemestralnyOOP.Services
     {
         public event Action<User> UserLogged;
         public event Action<List<Car>> YourCarsUpdated;
-        public event Action<List<Car>> MarketUpdated;
+        public event Action<List<Tuple<Car, Statistic>>> MarketUpdated;
         public event Action UserLoggedOut;
         
         public void LoginUser(User user)
@@ -24,7 +24,7 @@ namespace ProjektSemestralnyOOP.Services
             YourCarsUpdated?.Invoke(list);
         }
 
-        public void UpdateMarket(List<Car> list)
+        public void UpdateMarket(List<Tuple<Car, Statistic>> list)
         {
             MarketUpdated?.Invoke(list);
         }

@@ -30,7 +30,14 @@
                            FontSize="45"
                            FontFamily="Segoe UI Light"/>
 
-                <ListView ItemsSource="{Binding MarketCars}" SelectedItem ="{Binding SelectedCar}" FontFamily="Segoe UI Light" Foreground="White" Margin="19 0 19 0" Height="350" Background="Transparent" BorderThickness="0">
+                <ListView ItemsSource="{Binding MarketCars}" 
+                          SelectedItem ="{Binding SelectedCar}" 
+                          FontFamily="Segoe UI Light" 
+                          Foreground="White"
+                          Margin="19 0 19 0" 
+                          Height="350" 
+                          Background="Transparent" 
+                          BorderThickness="0">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -50,12 +57,12 @@
                                     <Setter Property="Margin" Value="0 0 0 2"/>
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
-                            <GridViewColumn Header="Car ID" Width="90">
+                            <GridViewColumn Header="Car ID" Width="50">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock HorizontalAlignment="Center" 
                                                    Padding="0 5 0 5" 
-                                                   Text="{Binding Id}"/>
+                                                   Text="{Binding Item1.Id}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -63,7 +70,7 @@
                             <GridViewColumn Header="Brand" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Brand}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Item1.Brand}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -71,7 +78,7 @@
                             <GridViewColumn Header="Model" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Model}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Item1.Model}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -79,8 +86,24 @@
                             <GridViewColumn Header="Statistics" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel HorizontalAlignment="Center">
-                                            <TextBlock Text="asd"/>
+                                        <StackPanel Margin=" 0 5 0 5">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Speed" Margin="0 0 35 0"/>
+                                                <TextBlock Text="{Binding Item2.Speed}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Acceleration" Margin="0 0 5 0"/>
+                                                <TextBlock Text="{Binding Item2.Acceleration}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Grip" Margin="0 0 46 0"/>
+                                                <TextBlock Text="{Binding Item2.Grip}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Braking" Margin="0 0 30 0"/>
+                                                <TextBlock Text="{Binding Item2.Braking}"/>
+                                            </StackPanel>
+                                            
                                         </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -89,7 +112,7 @@
                             <GridViewColumn Header="Price" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Price}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Item1.Price}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -97,7 +120,7 @@
                             <GridViewColumn Header="IsAvailable" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding IsAvailable}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Item1.IsAvailable}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -105,7 +128,7 @@
                             <GridViewColumn Header="User ID" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding UserId}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Item1.UserId}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

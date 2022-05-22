@@ -3,6 +3,7 @@ using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using ProjektSemestralnyOOP.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -16,8 +17,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private readonly User _loggedUser;
         private readonly ViewModelMediator _mediator;
         
-        private ObservableCollection<Car> _marketCars;
-        public ObservableCollection<Car> MarketCars
+        private ObservableCollection<Tuple<Car, Statistic>> _marketCars;
+        public ObservableCollection<Tuple<Car, Statistic>> MarketCars
         {
             get => _marketCars;
             set
@@ -27,7 +28,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
-        public Car SelectedCar { get; set; }
+        public Tuple<Car, Statistic> SelectedCar { get; set; }
 
         public ICommand BuyButton { get; }
         public ICommand SellButton { get; }
@@ -41,19 +42,17 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             _loggedUser = user;
         }
 
-        private void OnMarketUpdated(List<Car> obj)
-        {
-            MarketCars = new ObservableCollection<Car>(_service.ReadMarketAsync());
-        }
+        private void OnMarketUpdated(List<Tuple<Car, Statistic>> obj)
+            => AssignListFromDb();
 
         private async void BuyCommand()
         {
             if(SelectedCar is null)
             {
-                MessageBox.Show("Please select a car");
+                MessageBox.Show("Please select a car", "Info");
                 return;
             }
-            await _service.BuyCarAsync(SelectedCar.Id, _loggedUser.Id);
+            await _service.BuyCarAsync(SelectedCar.Item1.Id, _loggedUser.Id);
             AssignListFromDb();
         }
 
@@ -61,15 +60,22 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         {
             if (SelectedCar is null)
             {
-                MessageBox.Show("Please select a car");
+                MessageBox.Show("Please select a car", "Info");
                 return;
             }
-            await _service.SellCarAsync(SelectedCar.Id, _loggedUser.Id);
+
+            if (SelectedCar.Item1.UserId != _loggedUser.Id) 
+            {
+                MessageBox.Show("You can\'t sell a car you don\'t own", "Info");
+                return;
+            }
+
+            await _service.SellCarAsync(SelectedCar.Item1.Id, _loggedUser.Id);
             AssignListFromDb();
         }
 
         private void AssignListFromDb()
-            => MarketCars = new ObservableCollection<Car>(_service.ReadMarketAsync());
+            => MarketCars = new ObservableCollection<Tuple<Car, Statistic>>(_service.ReadMarketAsync());
 
     }
 }

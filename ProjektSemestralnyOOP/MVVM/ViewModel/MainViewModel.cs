@@ -88,7 +88,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private void MarketNavCommand()
         {
-            List<Car> list = _carService.ReadMarketAsync();
+            List<Tuple<Car, Statistic>> list = _carService.ReadMarketAsync();
             _mediator.UpdateMarket(list);
             CurrentView = _marketVM;
         }
