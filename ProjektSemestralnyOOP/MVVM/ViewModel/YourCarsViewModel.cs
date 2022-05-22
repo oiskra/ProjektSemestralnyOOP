@@ -21,8 +21,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private ViewModelMediator _mediatior;
         private User _loggedUser;
 
-        private ObservableCollection<Car> _yourCars;
-        public ObservableCollection<Car> YourCars
+        private ObservableCollection<Tuple<Car, Statistic>> _yourCars;
+        public ObservableCollection<Tuple<Car, Statistic>> YourCars
         {
             get => _yourCars;
             set
@@ -31,8 +31,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 OnPropertyChanged(nameof(YourCars));
             }
         }
-        private Car _selectedCar;
-        public Car SelectedCar
+        private Tuple<Car, Statistic> _selectedCar;
+        public Tuple<Car, Statistic> SelectedCar
         {
             get => _selectedCar;
             set
@@ -43,7 +43,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _challengedUsername;
-
         public string ChallengedUsername
         {
             get => _challengedUsername; 
@@ -54,25 +53,23 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
-        public ICommand ChallegeButton { get; set; }
+        public ICommand ChallengeButton { get; set; }
 
         public YourCarsViewModel(User user, ViewModelMediator mediator)
         {
+            ChallengeButton = new RelayCommand(ChallengeCommand);
             _mediatior = mediator;
             _loggedUser = user;
             _mediatior.YourCarsUpdated += OnYourCarsUpdated;
-            ChallegeButton = new RelayCommand(ChallegeCommand);
         }
 
-        private void OnYourCarsUpdated(List<Car> obj)
+        private void OnYourCarsUpdated(List<Tuple<Car, Statistic>> obj)
         {
-            YourCars = new ObservableCollection<Car>(obj);
+            YourCars = new ObservableCollection<Tuple<Car, Statistic>>(obj);
             SelectedCar = null;
         }
 
-        private void ChallegeCommand()
-        {
-            _raceService.CreateRaceAsync(_loggedUser.Username, ChallengedUsername, SelectedCar);
-        }
+        private async void ChallengeCommand() 
+            => await _raceService.CreateRaceAsync(_loggedUser.Username, ChallengedUsername, SelectedCar);
     }
 }

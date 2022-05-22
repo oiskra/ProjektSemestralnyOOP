@@ -81,7 +81,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private async void YourCarsNavCommand()
         {
-            List<Car> list = await _carService.ReadCarsAsync(_loggedUser.Id);
+            List<Tuple<Car, Statistic>> list = await _carService.ReadCarsAsync(_loggedUser.Id);
             _mediator.UpdateYourCars(list);
             CurrentView = _yourCarsVM;
         }

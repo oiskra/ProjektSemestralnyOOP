@@ -44,10 +44,17 @@ namespace ProjektSemestralnyOOP.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Car>> ReadCarsAsync(int userId)
+        public async Task<List<Tuple<Car,Statistic>>> ReadCarsAsync(int userId)
         {
-            List<Car> userCars = await _context.Market.Where(x => x.UserId == userId).ToListAsync();
-            return userCars;
+            /*List<Car> userCars = await _context.Market.Where(x => x.UserId == userId).ToListAsync();
+            return userCars;*/
+            var userCars = from m in _context.Market
+                         join s in _context.Statistics
+                         on m.Id equals s.CarId
+                         where m.UserId == userId
+                         select new Tuple<Car, Statistic>(m, s);
+
+            return await userCars.ToListAsync();
         }
 
         public async Task<List<Tuple<Car, Statistic>>> ReadMarketAsync()
@@ -62,7 +69,7 @@ namespace ProjektSemestralnyOOP.Services
 
         public async Task SellCarAsync(int carId, int userId)
         {
-            bool ifExists = await _context.Market.AnyAsync(x => x.Id == id);
+            bool ifExists = await _context.Market.AnyAsync(x => x.Id == carId);
             if (ifExists)
             {
                 User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);

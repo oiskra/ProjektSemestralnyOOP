@@ -76,7 +76,7 @@
                                     <DataTemplate>
                                         <TextBlock HorizontalAlignment="Center" 
                                                     Padding="0 5 0 5" 
-                                                    Text="{Binding Id}"/>
+                                                    Text="{Binding Item1.Id}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -84,7 +84,7 @@
                             <GridViewColumn Header="Brand" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Brand}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Item1.Brand}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -92,7 +92,7 @@
                             <GridViewColumn Header="Model" Width="100">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Model}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Item1.Model}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -166,41 +166,41 @@
                                    Foreground="White"
                                    Padding="0 7 0 0"/>
 
-                        <TextBlock Text="{Binding SelectedCar.Brand}"
+                        <TextBlock Text="{Binding SelectedCar.Item1.Brand}"
                                    Grid.Column="1"
                                    FontFamily="Segoe UI Bold"
                                    FontSize="20"
                                    TextAlignment="Center"
                                    Foreground="White"/>
-                        <TextBlock Text="{Binding SelectedCar.Model}"
+                        <TextBlock Text="{Binding SelectedCar.Item1.Model}"
                                    FontFamily="Segoe UI Bold"
                                    FontSize="20"
                                    Grid.Row="1"
                                    Grid.Column="1"
                                    TextAlignment="Center"
                                    Foreground="White"/>
-                        <TextBlock Text="{Binding SelectedCar.Statistics.Speed}"
+                        <TextBlock Text="{Binding SelectedCar.Item2.Speed}"
                                    FontFamily="Segoe UI Bold"
                                    FontSize="20"
                                    Grid.Row="2"
                                    Grid.Column="1"
                                    TextAlignment="Center"
                                    Foreground="White"/>
-                        <TextBlock Text="{Binding SelectedCar.Statistics.Acceleration}"
+                        <TextBlock Text="{Binding SelectedCar.Item2.Acceleration}"
                                    FontFamily="Segoe UI Bold"
                                    FontSize="20"
                                    Grid.Row="3"
                                    Grid.Column="1"
                                    TextAlignment="Center"
                                    Foreground="White"/>
-                        <TextBlock Text="{Binding SelectedCar.Statistics.Grip}"
+                        <TextBlock Text="{Binding SelectedCar.Item2.Grip}"
                                    FontFamily="Segoe UI Bold"
                                    FontSize="20"
                                    Grid.Row="4"
                                    Grid.Column="1"
                                    TextAlignment="Center"
                                    Foreground="White"/>
-                        <TextBlock Text="{Binding SelectedCar.Statistics.Braking}"
+                        <TextBlock Text="{Binding SelectedCar.Item2.Braking}"
                                    FontFamily="Segoe UI Bold"
                                    FontSize="20"
                                    Grid.Row="5"
@@ -236,7 +236,8 @@
                          Background="#100e31"
                          BorderBrush="#ffe987"
                          Opacity="0.85"
-                         FontFamily="Segoe UI Light"/>
+                         FontFamily="Segoe UI Light"
+                         Text="{Binding ChallengedUsername}"/>
 
                 <Button Width="200"
                         Height="30"
@@ -246,7 +247,8 @@
                         Foreground="Black"
                         Background="#fffa"
                         BorderBrush="#100e31"
-                        FontFamily="Segoe UI Light"/>
+                        FontFamily="Segoe UI Light"
+                        Command="{Binding ChallengeButton}"/>
 
             </StackPanel>
         </Grid>
