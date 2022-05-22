@@ -14,7 +14,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     public class MainViewModel : BaseViewModel
     {
         private User _loggedUser;
-        private readonly ICarService _carService = new CarService(new RacingDBContextFactory());
+        private readonly ICarService _carService = new CarService(new());
         private readonly ViewModelMediator _mediator;
         private StartUpViewModel _startUpVM;
         private ProfileViewModel _profileVM;
@@ -94,7 +94,10 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private void ProfileNavCommand()
-            => CurrentView = _profileVM;
+        {
+            _mediator.UpdateProfileInfo();
+            CurrentView = _profileVM;
+        }
 
         private void InitiateStartupView()
         {
@@ -114,7 +117,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             if (ShowButton) 
                 _adminPanelVM = new AdminPanelViewModel(_loggedUser);
             _marketVM = new MarketViewModel(_loggedUser, _mediator);
-            _profileVM = new ProfileViewModel(_loggedUser);
+            _profileVM = new ProfileViewModel(_loggedUser, _mediator);
             _yourCarsVM = new YourCarsViewModel(_loggedUser, _mediator);
             _racesVM = new RacesViewModel(_loggedUser);
         }

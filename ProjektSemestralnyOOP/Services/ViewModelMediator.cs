@@ -10,6 +10,7 @@ namespace ProjektSemestralnyOOP.Services
     public class ViewModelMediator
     {
         public event Action<User> UserLogged;
+        public event Action ProfileInfoUpdated;
         public event Action<List<Tuple<Car, Statistic>>> YourCarsUpdated;
         public event Action<List<Tuple<Car, Statistic>>> MarketUpdated;
         public event Action UserLoggedOut;
@@ -17,6 +18,11 @@ namespace ProjektSemestralnyOOP.Services
         public void LoginUser(User user)
         {
             UserLogged?.Invoke(user);
+        }
+
+        public void UpdateProfileInfo()
+        {
+            ProfileInfoUpdated?.Invoke();
         }
 
         public void UpdateYourCars(List<Tuple<Car, Statistic>> list)
