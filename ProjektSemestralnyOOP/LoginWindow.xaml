@@ -11,7 +11,8 @@
         Width="350"
         ResizeMode="NoResize"
         WindowStyle="None"
-        Background="#001334">
+        Background="#001334"
+        FocusManager.FocusedElement="{x:Reference loginTextBox}">
     <Grid>
         <Rectangle Width="350" Height="500" Grid.ColumnSpan="3" Grid.RowSpan="7">
             <Rectangle.Fill>
@@ -38,7 +39,8 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Margin="0 30 0 0"/>
-            <TextBox Height="35" 
+            <TextBox x:Name="loginTextBox"
+                     Height="35" 
                      Width="200"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
