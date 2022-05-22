@@ -14,12 +14,14 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     public class MainViewModel : BaseViewModel
     {
         private User _loggedUser;
+        private readonly ICarService _carService = new CarService(new RacingDBContextFactory());
         private readonly ViewModelMediator _mediator;
         private StartUpViewModel _startUpVM;
         private ProfileViewModel _profileVM;
         private YourCarsViewModel _yourCarsVM;
         private MarketViewModel _marketVM;
         private RacesViewModel _racesVM;
+        private AdminPanelViewModel _adminPanelVM;
 
         private object _currentView;
         public object CurrentView
@@ -31,6 +33,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 OnPropertyChanged(nameof(CurrentView));
             }
         }
+
         private bool _showButton;
         public bool ShowButton
         {
@@ -46,6 +49,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         public ICommand MarketButton { get; }
         public ICommand YourCarsButton { get; }
         public ICommand RacesButton { get; }
+        public ICommand AdminPanelButton { get; }
         public ICommand LogOutButton { get; }
 
         public MainViewModel(ViewModelMediator mediator)
@@ -55,7 +59,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             YourCarsButton = new RelayCommand(YourCarsNavCommand, x => _loggedUser != null);
             RacesButton = new RelayCommand(RacesNavCommand, x => _loggedUser != null);
             LogOutButton = new RelayCommand(LogOutCommand, x => _loggedUser != null);
-
+            AdminPanelButton = new RelayCommand(AdminPanelNavCommand);
 
             _mediator = mediator;
             _mediator.UserLogged += OnUserLogged;
@@ -69,20 +73,25 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             ShowButton = false;    
             CurrentView = _startUpVM;
         }
+        private void AdminPanelNavCommand()
+            => CurrentView = _adminPanelVM;
 
         private void RacesNavCommand()
             => CurrentView = _racesVM;
 
         private void YourCarsNavCommand()
         {
-            ICarService service = new CarService(new RacingDBContextFactory());
-            List<Car> list = service.ReadCarsAsync(_loggedUser.Id);
+            List<Car> list = _carService.ReadCarsAsync(_loggedUser.Id);
             _mediator.UpdateYourCars(list);
             CurrentView = _yourCarsVM;
         }
 
         private void MarketNavCommand()
-            => CurrentView = _marketVM;
+        {
+            List<Car> list = _carService.ReadMarketAsync();
+            _mediator.UpdateMarket(list);
+            CurrentView = _marketVM;
+        }
 
         private void ProfileNavCommand()
             => CurrentView = _profileVM;
@@ -102,7 +111,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         {
             _loggedUser = obj;
             ShowButton = _loggedUser.Username == "admin" && _loggedUser.Login == "admin";
-            _marketVM = new MarketViewModel(_loggedUser);
+            if (ShowButton) 
+                _adminPanelVM = new AdminPanelViewModel(_loggedUser);
+            _marketVM = new MarketViewModel(_loggedUser, _mediator);
             _profileVM = new ProfileViewModel(_loggedUser);
             _yourCarsVM = new YourCarsViewModel(_loggedUser, _mediator);
             _racesVM = new RacesViewModel(_loggedUser);

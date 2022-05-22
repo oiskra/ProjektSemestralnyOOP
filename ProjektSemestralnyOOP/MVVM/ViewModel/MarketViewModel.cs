@@ -3,12 +3,8 @@ using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using ProjektSemestralnyOOP.Services;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,6 +14,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     {
         private readonly ICarService _service = new CarService(new RacingDBContextFactory());
         private readonly User _loggedUser;
+        private readonly ViewModelMediator _mediator;
         
         private ObservableCollection<Car> _marketCars;
         public ObservableCollection<Car> MarketCars
@@ -35,12 +32,18 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         public ICommand BuyButton { get; }
         public ICommand SellButton { get; }
 
-        public MarketViewModel(User user)
+        public MarketViewModel(User user, ViewModelMediator mediator)
         {
             BuyButton = new RelayCommand(BuyCommand);
             SellButton = new RelayCommand(SellCommand);
-            AssignListFromDb();
+            _mediator = mediator;
+            _mediator.MarketUpdated += OnMarketUpdated;
             _loggedUser = user;
+        }
+
+        private void OnMarketUpdated(List<Car> obj)
+        {
+            MarketCars = new ObservableCollection<Car>(_service.ReadMarketAsync());
         }
 
         private async void BuyCommand()

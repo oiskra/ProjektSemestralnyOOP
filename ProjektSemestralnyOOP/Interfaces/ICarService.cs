@@ -13,5 +13,6 @@ namespace ProjektSemestralnyOOP.Interfaces
         List<Car> ReadMarketAsync();
         Task BuyCarAsync(int id, int userId);
         Task SellCarAsync(int id, int userId);
+        Task AddStatistic(Statistic entity);
     }
 }

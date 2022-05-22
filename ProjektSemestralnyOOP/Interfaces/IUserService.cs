@@ -11,7 +11,7 @@ namespace ProjektSemestralnyOOP.Interfaces
         Task RegisterUserAsync(User user);
         Task<User> LoginUserAsync(string login, string password);
         Task<User> ReadUserAsync(int id);
-        Task<ICollection<User>> ReadAllAsync();
+        Task<List<User>> ReadAllAsync();
         Task UpdateUserAsync(int id);
         Task<bool> DeleteUserAsync(int id);
     }

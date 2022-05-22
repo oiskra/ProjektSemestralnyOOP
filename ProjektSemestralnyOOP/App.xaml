@@ -25,5 +25,9 @@
         <DataTemplate DataType="{x:Type viewModel:RacesViewModel}">
             <view:RacesView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:AdminPanelViewModel}">
+            <view:AdminPanelView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

@@ -1,0 +1,319 @@
+﻿<UserControl x:Class="ProjektSemestralnyOOP.MVVM.View.AdminPanelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjektSemestralnyOOP.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="/Images/car.jpg" Grid.Column="1" Stretch="UniformToFill">
+            <Image.Effect>
+                <BlurEffect Radius="20"/>
+            </Image.Effect>
+        </Image>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Segoe UI Light"/>
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Text="ADMIN PANEL"
+                       TextAlignment="Center"
+                       Background="#ffa"
+                       Grid.ColumnSpan="3"
+                       Width="300"
+                       Height="55"
+                       FontSize="40" />
+
+            <StackPanel Grid.Row="1" Margin="20 10 0 0">
+                <TextBlock Text="Delete User"
+                       TextAlignment="Center"
+                       Background="#ffa"
+                       Grid.ColumnSpan="2"
+                       Width="110"
+                       FontSize="20"
+                       Margin="-220 0 0 0"/>
+
+                <StackPanel Orientation="Horizontal" Height="50" Margin="20 10 0 20">
+                    <TextBlock Text="UserID:"
+                               Foreground="White"
+                               Height="15"/>
+                    <TextBox FontFamily="Segoe UI Light"
+                             Width="130"
+                             Height="25"
+                             Margin="20 0 20 0"
+                             Foreground="White"
+                             Background="#100e31"
+                             Opacity=".8"
+                             BorderBrush="#ffe987"
+                             HorizontalContentAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Text="{Binding IdToDelete, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Width="120"
+                            Height="25"
+                            FontFamily="Segoe UI Light"
+                            Content="Delete"
+                            Background="#100e31"
+                            Foreground="White"
+                            BorderBrush="#100e31"
+                            Command="{Binding DeleteUserButton}"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" 
+                        Grid.RowSpan="3"
+                        Margin="20 19 0 0">
+                <TextBlock Text="User List"
+                       TextAlignment="Center"
+                       Background="#ffa"
+                       Grid.ColumnSpan="2"
+                       Width="100"
+                       FontSize="20"
+                       Margin="-230 10 0 20"/>
+
+                <ListView ItemsSource="{Binding Users}" 
+                          FontFamily="Segoe UI Light" 
+                          Foreground="White" 
+                          Height="350" 
+                          Margin="6 0 0 0"
+                          Background="Transparent" 
+                          BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+                            <Setter Property="Background" Value="#100e31"/>
+                            <Setter Property="Opacity" Value=".8"/>
+                            <Setter Property="Margin" Value="0 2 0 2"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Background" Value="#100e31"/>
+                                    <Setter Property="BorderBrush" Value="#100e31"/>
+                                    <Setter Property="Foreground" Value="white"/>
+                                    <Setter Property="Margin" Value="0 0 0 2"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Header="User ID" Width="60">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" 
+                                                       Padding="0 5 0 5" 
+                                                       Text="{Binding Id}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Usename" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Username}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Login" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Login}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Money" Width="85">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Money}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        Grid.RowSpan="5">
+                <TextBlock Text="Create Car"
+                       TextAlignment="Center"
+                       Background="#ffa"
+                       Grid.ColumnSpan="2"
+                       Width="100"
+                       FontSize="20"
+                       Margin="-100 10 0 0"/>
+
+
+                <StackPanel Margin="0 5 0 0" >
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Margin" Value="0 10 0 5"/>
+                            <Setter Property="TextAlignment" Value="Right"/>
+                        </Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Background" Value="#100e31"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <StackPanel Orientation="Horizontal" Height="50" 
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Brand:"
+                               Foreground="White"
+                               Height="15"/>
+                        <TextBox FontFamily="Segoe UI Light"
+                                 Width="130"
+                                 Height="25"
+                                 Margin="50 0 -10 0"
+                                 Foreground="White"
+                                 Background="#100e31"
+                                 Opacity=".8"
+                                 BorderBrush="#ffe987"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 Text="{Binding Brand, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Height="50"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Model:"
+                               Foreground="White"
+                               Height="15"/>
+                        <TextBox FontFamily="Segoe UI Light"
+                                 Width="130"
+                                 Height="25"
+                                 Margin="50 0 -10 0"
+                                 Foreground="White"
+                                 Background="#100e31"
+                                 Opacity=".8"
+                                 BorderBrush="#ffe987"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Height="50"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Speed:"
+                               Foreground="White"
+                               Height="15"/>
+                        <TextBox FontFamily="Segoe UI Light"
+                                 Width="130"
+                                 Height="25"
+                                 Margin="50 0 -10 0"
+                                 Foreground="White"
+                                 Background="#100e31"
+                                 Opacity=".8"
+                                 BorderBrush="#ffe987"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 Text="{Binding Speed, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Height="50" 
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Acceleration:"
+                                   Foreground="White"
+                                   Height="15"
+                                   Margin="30 0 0 0"/>
+                        <TextBox FontFamily="Segoe UI Light"
+                                 Width="130"
+                                 Height="25"
+                                 Margin="20 0 20 0"
+                                 Foreground="White"
+                                 Background="#100e31"
+                                 Opacity=".8"
+                                 BorderBrush="#ffe987"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 Text="{Binding Acceleration, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Height="50"
+                                    HorizontalAlignment="Center">
+                        <TextBlock Text="Grip:"
+                                   Foreground="White"
+                                   Height="15"
+                                   Margin="30 0 40 0"/>
+                        <TextBox FontFamily="Segoe UI Light"
+                                Width="130"
+                                Height="25"
+                                Margin="20 0 20 0"
+                                Foreground="White"
+                                Background="#100e31"
+                                Opacity=".8"
+                                BorderBrush="#ffe987"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Text="{Binding Grip, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" 
+                                Height="50"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="Braking:"
+                                   Foreground="White"
+                                   Height="15"
+                                   Margin="30 0 22 0"/>
+                        <TextBox FontFamily="Segoe UI Light"
+                                 Width="130"
+                                 Height="25"
+                                 Margin="20 0 20 0"
+                                 Foreground="White"
+                                 Background="#100e31"
+                                 Opacity=".8"
+                                 BorderBrush="#ffe987"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 Text="{Binding Braking, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Button Width="215"
+                        Height="30"
+                        Margin="10 20 0 0"
+                        FontFamily="Segoe UI Light"
+                        Content="Create"
+                        Background="#100e31"
+                        Foreground="White"
+                        BorderBrush="#ffa"
+                        Command="{Binding CreateCarButton}"/>
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

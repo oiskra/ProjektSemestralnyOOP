@@ -23,10 +23,15 @@ namespace ProjektSemestralnyOOP.Services
 
         public async Task<bool> DeleteUserAsync(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return true;
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception) { return false; }
+
         }
 
         public async Task<User> LoginUserAsync(string login, string password)
@@ -39,7 +44,7 @@ namespace ProjektSemestralnyOOP.Services
             catch { return null; }
         }
 
-        public async Task<ICollection<User>> ReadAllAsync()
+        public async Task<List<User>> ReadAllAsync()
         {
             List<User> allUsers = await _context.Users.ToListAsync();
             return allUsers;
@@ -65,6 +70,7 @@ namespace ProjektSemestralnyOOP.Services
         public async Task UpdateUserAsync(int id)
         {
             User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (user.Username == "admin") return;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }

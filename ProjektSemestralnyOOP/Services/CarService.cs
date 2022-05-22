@@ -2,9 +2,11 @@
 using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjektSemestralnyOOP.Services
 {
@@ -62,6 +64,20 @@ namespace ProjektSemestralnyOOP.Services
                 car.UserId = null;
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task AddStatistic(Statistic entity)
+        {
+            try
+            {
+                await _context.Statistics.AddAsync(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);   
+            }
+            
         }
     }
 }
