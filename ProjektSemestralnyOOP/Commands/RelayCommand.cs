@@ -10,7 +10,7 @@ namespace ProjektSemestralnyOOP.Commands
     public class RelayCommand : ICommand
     {
         private Action _execute;
-        private Predicate<object> _canExecute;
+        private Func<bool> _canExecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -21,14 +21,14 @@ namespace ProjektSemestralnyOOP.Commands
         public RelayCommand(Action execute) : this(execute, null)
         { }
 
-        public RelayCommand(Action execute, Predicate<object> canExecute)
+        public RelayCommand(Action execute, Func<bool> canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
-            => _canExecute == null || _canExecute(parameter);
+            => _canExecute == null || _canExecute();
 
         public void Execute(object parameter)
         {

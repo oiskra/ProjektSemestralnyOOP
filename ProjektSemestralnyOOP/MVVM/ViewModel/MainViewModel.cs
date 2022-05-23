@@ -54,11 +54,11 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         public MainViewModel(ViewModelMediator mediator)
         {
-            ProfileButton = new RelayCommand(ProfileNavCommand, x => _loggedUser != null);
-            MarketButton = new RelayCommand(MarketNavCommand, x => _loggedUser != null);
-            YourCarsButton = new RelayCommand(YourCarsNavCommand, x => _loggedUser != null);
-            RacesButton = new RelayCommand(RacesNavCommand, x => _loggedUser != null);
-            LogOutButton = new RelayCommand(LogOutCommand, x => _loggedUser != null);
+            ProfileButton = new RelayCommand(ProfileNavCommand, () => _loggedUser != null);
+            MarketButton = new RelayCommand(MarketNavCommand, () => _loggedUser != null);
+            YourCarsButton = new RelayCommand(YourCarsNavCommand, () => _loggedUser != null);
+            RacesButton = new RelayCommand(RacesNavCommand, () => _loggedUser != null);
+            LogOutButton = new RelayCommand(LogOutCommand, () => _loggedUser != null);
             AdminPanelButton = new RelayCommand(AdminPanelNavCommand);
 
             _mediator = mediator;

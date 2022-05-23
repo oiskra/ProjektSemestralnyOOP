@@ -116,13 +116,13 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         public AdminPanelViewModel(User user)
         {
-            CreateCarButton = new RelayCommand(CreateCarCommand, x => !string.IsNullOrEmpty(Brand) &&
+            CreateCarButton = new RelayCommand(CreateCarCommand, () => !string.IsNullOrEmpty(Brand) &&
                                                                         !string.IsNullOrEmpty(Model) &&
                                                                         !string.IsNullOrEmpty(Speed) &&
                                                                         !string.IsNullOrEmpty(Acceleration) &&
                                                                         !string.IsNullOrEmpty(Grip) &&
                                                                         !string.IsNullOrEmpty(Braking));
-            DeleteUserButton = new RelayCommand(DeleteUserCommand, x => !string.IsNullOrEmpty(IdToDelete));
+            DeleteUserButton = new RelayCommand(DeleteUserCommand, () => !string.IsNullOrEmpty(IdToDelete));
             _loggedUser = user;
             LoadUsersList();
         }

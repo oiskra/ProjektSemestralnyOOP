@@ -13,8 +13,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         private readonly ViewModelMediator _mediator;
+        private LoginWindow _window; 
+        
         private string _login;
-
         public string Login
         {
             get { return _login; }
@@ -26,7 +27,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _password;
-
         public string Password
         {
             get { return _password; }
@@ -36,22 +36,25 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 OnPropertyChanged(nameof(Password));
             }
         }
-        public LoginWindow Window { get; }
 
         public ICommand SubmitButton { get; }
         public ICommand CancelButton { get; }
 
         public LoginViewModel(LoginWindow window, ViewModelMediator mediator)
         {
-            SubmitButton = new RelayCommand(SubmitLoginCommand);
+            SubmitButton = new RelayCommand(SubmitLoginCommand, () => 
+                !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password));
             CancelButton = new RelayCommand(CancelLoginCommand);
-            Window = window;
+            
+            _window = window;
             _mediator = mediator;
         }
 
         private void CancelLoginCommand()
         {
-            Window.Hide();
+            _window.Hide();
+            Password = null;
+            Login = null;
         }
 
         private async void SubmitLoginCommand()
@@ -63,7 +66,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             {
                 _mediator.LoginUser(loggedUser);
                 MessageBox.Show("True", "islogged?");
-                Window.Hide();
+                _window.Hide();
                 Password = null;
                 Login = null;
                 return;

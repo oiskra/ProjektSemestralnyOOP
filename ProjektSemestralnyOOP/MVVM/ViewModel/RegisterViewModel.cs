@@ -14,8 +14,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
     public class RegisterViewModel : BaseViewModel
     {
-        private string _username;
+        private RegisterWindow _window;
 
+        private string _username;
         public string Username
         {
             get => _username;
@@ -27,7 +28,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _login;
-
         public string Login
         {
             get => _login;
@@ -39,7 +39,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _password;
-
         public string Password
         {
             get => _password;
@@ -49,21 +48,26 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 OnPropertyChanged(nameof(Password));
             }
         }
-        public RegisterWindow Window { get; }
 
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
 
         public RegisterViewModel(RegisterWindow window)
         {
-            SubmitCommand = new RelayCommand(SubmitRegisterCommand);
+            SubmitCommand = new RelayCommand(SubmitRegisterCommand, () =>
+                !string.IsNullOrEmpty(Username) &&
+                !string.IsNullOrEmpty(Login) &&
+                !string.IsNullOrEmpty(Password));
             CancelCommand = new RelayCommand(CancelRegisterCommand);
-            Window = window;
+            _window = window;
         }
 
         private void CancelRegisterCommand()
         {
-            Window.Hide();
+            _window.Hide();
+            Username = null;
+            Login = null;
+            Password = null;
         }
 
         private async void SubmitRegisterCommand()
@@ -71,14 +75,14 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             IUserService service = new UserService(new RacingDBContextFactory());
             User newUser = new()
             {
-                Username = this.Username,
-                Login = this.Login,
-                Password = this.Password,
+                Username = Username,
+                Login = Login,
+                Password = Password,
                 Money = 1000
             };
             
             await service.RegisterUserAsync(newUser);
-            Window.Hide();
+            _window.Hide();
             Username = null;
             Login = null;
             Password = null;
