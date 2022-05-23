@@ -6,24 +6,25 @@ using ProjektSemestralnyOOP.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
+    /// <summary>
+    /// Provides interaction logic for AdminPanel view.
+    /// </summary>
     public class AdminPanelViewModel : BaseViewModel
     {
-        private static readonly RacingDBContextFactory _contextFactory = new();
+        private static RacingDBContextFactory _contextFactory = new();
         private readonly IUserService _userService = new UserService(_contextFactory);
         private readonly ICarService _carService = new CarService(_contextFactory);
-        private User _loggedUser;
+        private User _loggedUser;       
         
-
-
         private ObservableCollection<User> _users;
+        /// <summary>
+        /// Provides collection of users from database.
+        /// </summary>
         public ObservableCollection<User> Users
         {
             get => _users;
@@ -35,6 +36,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _idToDelete;
+        /// <summary>
+        /// Contains ID of a user that has to be deleted from the database.
+        /// </summary>
         public string IdToDelete
         {
             get => _idToDelete;
@@ -46,6 +50,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _brand;
+        /// <summary>
+        /// Contains brand component for new Car model.
+        /// </summary>
         public string Brand
         {
             get => _brand;
@@ -57,6 +64,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _model;
+        /// <summary>
+        /// Contains model component for new Car model.
+        /// </summary>
         public string Model
         {
             get => _model;
@@ -68,6 +78,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _speed;
+        /// <summary>
+        /// Contains speed component for new Car model.
+        /// </summary>
         public string Speed
         {
             get => _speed;
@@ -79,6 +92,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _acceleration;
+        /// <summary>
+        /// Contains acceleration component for new Car model.
+        /// </summary>
         public string Acceleration
         {
             get => _acceleration;
@@ -90,6 +106,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _grip;
+        /// <summary>
+        /// Contains grip component for new Car model.
+        /// </summary>
         public string Grip
         {
             get => _grip;
@@ -101,6 +120,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _braking;
+        /// <summary>
+        /// Contains Braking component for new Car model.
+        /// </summary>
         public string Braking
         {
             get => _braking;
@@ -111,19 +133,30 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
+        /// <summary>
+        /// Provides a command for deleting user from the database.
+        /// </summary>
         public ICommand DeleteUserButton { get; }
+        /// <summary>
+        /// Provides a command for inserting new Car into the database.
+        /// </summary>
         public ICommand CreateCarButton { get; }
 
-        public AdminPanelViewModel(User user)
+        /// <summary>
+        /// Initializes a new instance of the AdminPanel class
+        /// </summary>
+        /// <param name="loggedUser">Object of logged in user</param>
+        public AdminPanelViewModel(User loggedUser)
         {
-            CreateCarButton = new RelayCommand(CreateCarCommand, () => !string.IsNullOrEmpty(Brand) &&
-                                                                        !string.IsNullOrEmpty(Model) &&
-                                                                        !string.IsNullOrEmpty(Speed) &&
-                                                                        !string.IsNullOrEmpty(Acceleration) &&
-                                                                        !string.IsNullOrEmpty(Grip) &&
-                                                                        !string.IsNullOrEmpty(Braking));
+            CreateCarButton = new RelayCommand(CreateCarCommand, () => 
+                !string.IsNullOrEmpty(Brand) &&
+                !string.IsNullOrEmpty(Model) &&
+                !string.IsNullOrEmpty(Speed) &&
+                !string.IsNullOrEmpty(Acceleration) &&
+                !string.IsNullOrEmpty(Grip) &&
+                !string.IsNullOrEmpty(Braking));
             DeleteUserButton = new RelayCommand(DeleteUserCommand, () => !string.IsNullOrEmpty(IdToDelete));
-            _loggedUser = user;
+            _loggedUser = loggedUser;
             LoadUsersList();
         }
 
@@ -179,7 +212,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             {
                 MessageBox.Show("Wrong input values", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
         private async void LoadUsersList()

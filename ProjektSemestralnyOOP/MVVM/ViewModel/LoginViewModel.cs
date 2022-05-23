@@ -1,21 +1,25 @@
 ﻿using ProjektSemestralnyOOP.Commands;
-using System;
 using System.Windows.Input;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.Services;
 using ProjektSemestralnyOOP.DBcontext;
-using System.Threading.Tasks;
 using System.Windows;
 using ProjektSemestralnyOOP.MVVM.Model;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
+    /// <summary>
+    /// Provides interaction logic for Login view.
+    /// </summary>
     public class LoginViewModel : BaseViewModel
     {
         private readonly ViewModelMediator _mediator;
         private LoginWindow _window; 
         
         private string _login;
+        /// <summary>
+        /// Contains login component for Login Form.
+        /// </summary>
         public string Login
         {
             get { return _login; }
@@ -27,6 +31,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _password;
+        /// <summary>
+        /// Contains password component for Login Form.
+        /// </summary>
         public string Password
         {
             get { return _password; }
@@ -37,9 +44,18 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
+        /// <summary>
+        /// Provides a command for submitting login form.
+        /// </summary>
         public ICommand SubmitButton { get; }
+        /// <summary>
+        /// Provides a command for canceling login form.
+        /// </summary>
         public ICommand CancelButton { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the LoginViewModel class
+        /// </summary>
         public LoginViewModel(LoginWindow window, ViewModelMediator mediator)
         {
             SubmitButton = new RelayCommand(SubmitLoginCommand, () => 

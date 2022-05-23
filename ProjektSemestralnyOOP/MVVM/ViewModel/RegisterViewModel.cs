@@ -3,20 +3,21 @@ using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using ProjektSemestralnyOOP.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
+    /// <summary>
+    /// Provides interaction logic for Register view.
+    /// </summary>
     public class RegisterViewModel : BaseViewModel
     {
         private RegisterWindow _window;
 
         private string _username;
+        /// <summary>
+        /// Contains username component for Register Form.
+        /// </summary>
         public string Username
         {
             get => _username;
@@ -28,6 +29,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _login;
+        /// <summary>
+        /// Contains login component for Register Form.
+        /// </summary>
         public string Login
         {
             get => _login;
@@ -39,6 +43,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _password;
+        /// <summary>
+        /// Contains password component for Register Form.
+        /// </summary>
         public string Password
         {
             get => _password;
@@ -49,9 +56,18 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
+        /// <summary>
+        /// Provides a command for submitting register form.
+        /// </summary>
         public ICommand SubmitCommand { get; }
+        /// <summary>
+        /// Provides a command for canceling login form.
+        /// </summary>
         public ICommand CancelCommand { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the RegisterViewModel class
+        /// </summary>
         public RegisterViewModel(RegisterWindow window)
         {
             SubmitCommand = new RelayCommand(SubmitRegisterCommand, () =>

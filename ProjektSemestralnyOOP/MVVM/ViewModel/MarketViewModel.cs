@@ -11,6 +11,9 @@ using System.Windows.Input;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
+    /// <summary>
+    /// Provides interaction logic for Market view.
+    /// </summary>
     public class MarketViewModel : BaseViewModel
     {
         private readonly ICarService _service = new CarService(new RacingDBContextFactory());
@@ -18,6 +21,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private readonly ViewModelMediator _mediator;
         
         private ObservableCollection<Tuple<Car, Statistic>> _marketCars;
+        /// <summary>
+        /// Provides collection of cars from database.
+        /// </summary>
         public ObservableCollection<Tuple<Car, Statistic>> MarketCars
         {
             get => _marketCars;
@@ -28,18 +34,32 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
+        /// <summary>
+        /// Contains selected object from the MarketCars collection
+        /// </summary>
         public Tuple<Car, Statistic> SelectedCar { get; set; }
 
+        /// <summary>
+        /// Provides a command for buying car.
+        /// </summary>
         public ICommand BuyButton { get; }
+
+        /// <summary>
+        /// Provides a command for selling car.
+        /// </summary>
         public ICommand SellButton { get; }
 
-        public MarketViewModel(User user, ViewModelMediator mediator)
+        /// <summary>
+        /// Initializes a new instance of the MarketViewModel class
+        /// </summary>
+        /// <param name="loggedUser">Object of logged in user</param>
+        public MarketViewModel(User loggedUser, ViewModelMediator mediator)
         {
             BuyButton = new RelayCommand(BuyCommand);
             SellButton = new RelayCommand(SellCommand);
             _mediator = mediator;
             _mediator.MarketUpdated += OnMarketUpdated;
-            _loggedUser = user;
+            _loggedUser = loggedUser;
         }
 
         private void OnMarketUpdated(List<Tuple<Car, Statistic>> obj)

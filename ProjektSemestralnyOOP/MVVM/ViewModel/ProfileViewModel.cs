@@ -1,24 +1,24 @@
 ﻿using ProjektSemestralnyOOP.Commands;
-using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using ProjektSemestralnyOOP.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
+    /// <summary>
+    /// Provides interaction logic for Profile view.
+    /// </summary>
     public class ProfileViewModel : BaseViewModel
     {
         private readonly ViewModelMediator _mediator; 
         private readonly User _loggedUser;
 
         private int _id;
+        /// <summary>
+        /// Contains ID component to display in view.
+        /// </summary>
         public int Id
         {
             get => _id;
@@ -30,6 +30,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _username;
+        /// <summary>
+        /// Contains username component to display in view.
+        /// </summary>
         public string Username
         {
             get { return _username; }
@@ -41,6 +44,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _login;
+        /// <summary>
+        /// Contains login component to display in view.
+        /// </summary>
         public string Login
         {
             get { return _login; }
@@ -52,6 +58,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _password;
+        /// <summary>
+        /// Contains password component to display in view.
+        /// </summary>
         public string Password
         {
             get { return _password; }
@@ -63,6 +72,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private int _money;
+        /// <summary>
+        /// Contains money component to display in view.
+        /// </summary>
         public int Money
         {
             get => _money;
@@ -74,6 +86,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _usernameToUpdate;
+        /// <summary>
+        /// Contains updated username component.
+        /// </summary>
         public string UsernameToUpdate
         {
             get { return _usernameToUpdate; }
@@ -85,6 +100,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _loginToUpdate;
+        /// <summary>
+        /// Contains updated login component.
+        /// </summary>
         public string LoginToUpdate
         {
             get { return _loginToUpdate; }
@@ -96,6 +114,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         }
 
         private string _passwordToUpdate;
+        /// <summary>
+        /// Contains updated password component.
+        /// </summary>
         public string PasswordToUpdate
         {
             get { return _passwordToUpdate; }
@@ -106,8 +127,15 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
+        /// <summary>
+        /// Provides a command for updating user info
+        /// </summary>
         public ICommand UpdateButton { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the ProfileViewModel class
+        /// </summary>
+        /// <param name="loggedUser">Object of logged in user</param>
         public ProfileViewModel(User user, ViewModelMediator mediator)
         {
             _mediator = mediator;
@@ -118,7 +146,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             _loginToUpdate = _loggedUser.Login;
             _passwordToUpdate = _loggedUser.Password;
             
-            UpdateButton = new RelayCommand(UpdateCommand, x =>
+            UpdateButton = new RelayCommand(UpdateCommand, () =>
                 !string.IsNullOrEmpty(UsernameToUpdate) &&
                 !string.IsNullOrEmpty(LoginToUpdate) &&
                 !string.IsNullOrEmpty(PasswordToUpdate) &&

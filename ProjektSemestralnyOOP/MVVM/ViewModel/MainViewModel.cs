@@ -1,16 +1,16 @@
 ﻿using ProjektSemestralnyOOP.Commands;
 using System;
-using System.ComponentModel;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.Services;
-using System.Windows;
 using ProjektSemestralnyOOP.MVVM.Model;
 using System.Windows.Input;
-using ProjektSemestralnyOOP.DBcontext;
 using System.Collections.Generic;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
 {
+    /// <summary>
+    /// Provides interaction logic for MainWindow view
+    /// </summary>
     public class MainViewModel : BaseViewModel
     {
         private User _loggedUser;
@@ -24,6 +24,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private AdminPanelViewModel _adminPanelVM;
 
         private object _currentView;
+        /// <summary>
+        /// Determines the current view for the application.
+        /// </summary>
         public object CurrentView
         {
             get => _currentView;
@@ -34,24 +37,48 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             }
         }
 
-        private bool _showButton;
-        public bool ShowButton
+        private bool _showAdminButton;
+        /// <summary>
+        /// Determines whether the admin panel button should be shown or not.
+        /// </summary>
+        public bool ShowAdminButton
         {
-            get => _showButton; 
+            get => _showAdminButton; 
             set
             {
-                _showButton = value;
-                OnPropertyChanged(nameof(ShowButton));
+                _showAdminButton = value;
+                OnPropertyChanged(nameof(ShowAdminButton));
             }
         }
 
+        /// <summary>
+        /// Provides a navigation command to Profile view.
+        /// </summary>
         public ICommand ProfileButton { get; }
+        /// <summary>
+        /// Provides a navigation command to Market view.
+        /// </summary>
         public ICommand MarketButton { get; }
+        /// <summary>
+        /// Provides a navigation command to YourCars view.
+        /// </summary>
         public ICommand YourCarsButton { get; }
+        /// <summary>
+        /// Provides a navigation command to Races view.
+        /// </summary>
         public ICommand RacesButton { get; }
+        /// <summary>
+        /// Provides a navigation command to AdminPanel view.
+        /// </summary>
         public ICommand AdminPanelButton { get; }
+        /// <summary>
+        /// Provides a command for user to log out
+        /// </summary>
         public ICommand LogOutButton { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the MainViewModel class
+        /// </summary>
         public MainViewModel(ViewModelMediator mediator)
         {
             ProfileButton = new RelayCommand(ProfileNavCommand, () => _loggedUser != null);
@@ -60,7 +87,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             RacesButton = new RelayCommand(RacesNavCommand, () => _loggedUser != null);
             LogOutButton = new RelayCommand(LogOutCommand, () => _loggedUser != null);
             AdminPanelButton = new RelayCommand(AdminPanelNavCommand);
-
             _mediator = mediator;
             _mediator.UserLogged += OnUserLogged;
             InitiateStartupView();
@@ -70,10 +96,10 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         {
             _loggedUser = null;
             _mediator.LogOutUser();
-            ShowButton = false;    
+            ShowAdminButton = false;    
             CurrentView = _startUpVM;
         }
-        private void AdminPanelNavCommand()
+        private void AdminPanelNavCommand() 
             => CurrentView = _adminPanelVM;
 
         private void RacesNavCommand()
@@ -113,8 +139,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         private void OnUserLogged(User obj)
         {
             _loggedUser = obj;
-            ShowButton = _loggedUser.Username == "admin" && _loggedUser.Login == "admin";
-            if (ShowButton) 
+            ShowAdminButton = _loggedUser.Username == "admin" && _loggedUser.Login == "admin";
+            if (ShowAdminButton) 
                 _adminPanelVM = new AdminPanelViewModel(_loggedUser);
             _marketVM = new MarketViewModel(_loggedUser, _mediator);
             _profileVM = new ProfileViewModel(_loggedUser, _mediator);

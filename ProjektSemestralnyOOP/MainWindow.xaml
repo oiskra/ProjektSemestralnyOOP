@@ -93,7 +93,7 @@
             <Button Content="Market" Command="{Binding MarketButton}"/>
             <Button Content="Your Cars" Command="{Binding YourCarsButton}"/>
             <Button Content="Races" Command="{Binding RacesButton}"/>
-            <Button Command="{Binding AdminPanelButton}" Content="Admin Panel" Visibility="{Binding Path=ShowButton, Converter={StaticResource Converter}}"/>
+            <Button Command="{Binding AdminPanelButton}" Content="Admin Panel" Visibility="{Binding Path=ShowAdminButton, Converter={StaticResource Converter}}"/>
             <Button Content="Log Out" Command="{Binding LogOutButton}"/>
         </StackPanel>
 
