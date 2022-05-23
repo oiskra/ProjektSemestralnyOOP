@@ -149,7 +149,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 };
 
                 newStatistic.CarId = newCar.Id;
-                newStatistic.Car = newCar;
 
                 await _carService.CreateCarAsync(newCar);
                 await _carService.AddStatistic(newStatistic);

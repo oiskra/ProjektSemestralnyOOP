@@ -12,7 +12,7 @@ namespace ProjektSemestralnyOOP.Interfaces
         Task<User> LoginUserAsync(string login, string password);
         Task<User> ReadUserAsync(int id);
         Task<List<User>> ReadAllAsync();
-        Task UpdateUserAsync(int id);
+        Task UpdateUserAsync(User updatedUser);
         Task<bool> DeleteUserAsync(int id);
     }
 }

@@ -74,8 +74,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 Username = this.Username,
                 Login = this.Login,
                 Password = this.Password,
-                Money = 1000,
-                Cars = new List<Car>()
+                Money = 1000
             };
             
             await service.RegisterUserAsync(newUser);

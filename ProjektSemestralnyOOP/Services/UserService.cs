@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjektSemestralnyOOP.Services
 {
@@ -67,11 +68,14 @@ namespace ProjektSemestralnyOOP.Services
             }
         }
 
-        public async Task UpdateUserAsync(int id)
+        public async Task UpdateUserAsync(User updatedUser)
         {
-            User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            if (user.Username == "admin") return;
-            _context.Users.Update(user);
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == updatedUser.Id);
+
+            user.Username = updatedUser.Username;
+            user.Login = updatedUser.Login;
+            user.Password = updatedUser.Password;
+            
             await _context.SaveChangesAsync();
         }
     }

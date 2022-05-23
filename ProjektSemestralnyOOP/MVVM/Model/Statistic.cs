@@ -13,9 +13,7 @@ namespace ProjektSemestralnyOOP.MVVM.Model
         public int Acceleration { get; set; }
         public int Grip { get; set; }
         public int Braking { get; set; }
-
-
         public int CarId { get; set; }
-        public Car Car { get; set; }
+
     }
 }
