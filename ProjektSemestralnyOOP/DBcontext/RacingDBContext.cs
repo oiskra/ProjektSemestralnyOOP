@@ -3,6 +3,9 @@ using ProjektSemestralnyOOP.MVVM.Model;
 
 namespace ProjektSemestralnyOOP.DBcontext
 {
+    /// <summary>
+    /// Class that represents RacingDatabase. Used to access tables throught C#.
+    /// </summary>
     public class RacingDBContext : DbContext
     {
         public DbSet<User> Users { get; set; }

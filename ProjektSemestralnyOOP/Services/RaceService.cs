@@ -11,19 +11,30 @@ using System.Windows;
 namespace ProjektSemestralnyOOP.Services
 {
     /// <summary>
-    /// Provides methods that operate with database and Race entity 
+    /// Provides methods that operate with database and <see cref="Race"/> entity 
     /// </summary>
     public class RaceService : IRaceService
     {
         private readonly RacingDBContext _context;
         private readonly ICarService _carService;
 
-        public RaceService(RacingDBContextFactory context)
+        /// <summary>
+        /// Initializes new instance of <see cref="Race"/> class
+        /// </summary>
+        /// <param name="context"></param>
+        public RaceService(RacingDBContextFactory contextFactory)
         {
-            _context = context.CreateDbContext();
-            _carService = new CarService(context);
+            _context = contextFactory.CreateDbContext();
+            _carService = new CarService(contextFactory);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loggedUsername"></param>
+        /// <param name="challengedUsername"></param>
+        /// <param name="loggedUserCar"></param>
+        /// <returns><see cref="Task"/></returns>
         public async Task CreateRaceAsync(string loggedUsername, string challengedUsername, Tuple<Car, Statistic> loggedUserCar)
         {
             User loggedUser = await _context.Users.Where(x => x.Username == loggedUsername).FirstOrDefaultAsync();
@@ -83,12 +94,21 @@ namespace ProjektSemestralnyOOP.Services
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Method that asynchronously returns entire Race Table from database.
+        /// </summary>
+        /// <returns>Task with result of List of <see cref="Race"> object.</returns>
         public async Task<List<Race>> ReadAllRacesAsync()
         {
             List<Race> races = await _context.Races.ToListAsync();
             return races;
         }
 
+        /// <summary>
+        /// Method that asynchorously returns list of <see cref="Race"> objects where either <see cref="Race.RacerOne"> or <see cref="Race.RacerTwo"> has username of <see cref="User"> with provided id.
+        /// </summary>
+        /// <param name="id">Id of <see cref="User"> whose races have to be returned form the database.</param>
+        /// <returns>Task with result of List of <see cref="Race"> object.</returns>
         public async Task<List<Race>> ReadRaceAsync(int id)
         {
             var user = await _context.Users.FirstAsync(x => x.Id == id);

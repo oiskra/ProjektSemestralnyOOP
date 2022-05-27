@@ -2,11 +2,9 @@
 using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
+
 
 namespace ProjektSemestralnyOOP.Services
 {
@@ -17,11 +15,20 @@ namespace ProjektSemestralnyOOP.Services
     {
         private readonly RacingDBContext _context;
 
-        public UserService(RacingDBContextFactory context)
+        /// <summary>
+        /// Initializes new instance of <see cref="UserService"/> class
+        /// </summary>
+        /// <param name="context"></param>
+        public UserService(RacingDBContextFactory contextFactory)
         {
-            _context = context.CreateDbContext();
+            _context = contextFactory.CreateDbContext();
         }
 
+        /// <summary>
+        /// Method that asynchronously deletes user from DB with provided id. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Task operation with result true if user was successfully delete, false otherwise</returns>
         public async Task<bool> DeleteUserAsync(int id)
         {
             try
@@ -31,10 +38,16 @@ namespace ProjektSemestralnyOOP.Services
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch (Exception) { return false; }
+            catch { return false; }
 
         }
 
+        /// <summary>
+        /// Method that asynchronously searches for <see cref="User"/> in database by provided login and password.
+        /// </summary>
+        /// <param name="login"><see cref="User"/> property Login.</param>
+        /// <param name="password"><see cref="User"/> property Password.</param>
+        /// <returns>Task with result of <see cref="User"/> if such exists, and null otherwise.</returns>
         public async Task<User> LoginUserAsync(string login, string password)
         {
             try
@@ -45,20 +58,35 @@ namespace ProjektSemestralnyOOP.Services
             catch { return null; }
         }
 
+        /// <summary>
+        /// Method that asynchronously returns entire User Table from database. 
+        /// </summary>
+        /// <returns>Task with result of List of <see cref="User"/> objects.</returns>
         public async Task<List<User>> ReadAllAsync()
         {
             List<User> allUsers = await _context.Users.ToListAsync();
             return allUsers;
         }
 
+        /// <summary>
+        /// Method that asynchronously finds and returns <see cref="User"/> with provided id. 
+        /// </summary>
+        /// <param name="id">Id of <see cref="User"/> that needs to be found.</param>
+        /// <returns>Task with result of <see cref="User"/> object.</returns>
         public async Task<User> ReadUserAsync(int id)
         {
             User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             return user;
         }
 
+        /// <summary>
+        /// Method that asynchronously creates a new database entry based on provided <see cref="User"/> object.
+        /// </summary>
+        /// <param name="user"><see cref="User"/> that is inserted to database.</param>
+        /// <returns><see cref="Task"/></returns>
         public async Task RegisterUserAsync(User user)
         {
+            // DO NAPRAWY!!!
             bool ifExists = await _context.Users.AnyAsync(x => x.Id == user.Id);
             if (!ifExists)
             {
@@ -68,6 +96,11 @@ namespace ProjektSemestralnyOOP.Services
             }
         }
 
+        /// <summary>
+        /// Method that asynchronously find a <see cref="User"/> in database and updates columns: Login, Password, Username.
+        /// </summary>
+        /// <param name="updatedUser"><see cref="User"/> object with values to update.</param>
+        /// <returns><see cref="Task"/></returns>
         public async Task UpdateUserAsync(User updatedUser)
         {
             User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == updatedUser.Id);
