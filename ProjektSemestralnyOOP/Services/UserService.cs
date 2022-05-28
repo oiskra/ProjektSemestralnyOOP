@@ -4,7 +4,7 @@ using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Windows;
 
 namespace ProjektSemestralnyOOP.Services
 {
@@ -27,7 +27,7 @@ namespace ProjektSemestralnyOOP.Services
         /// <summary>
         /// Method that asynchronously deletes user from DB with provided id. 
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id of <see cref="User"/> to delete.</param>
         /// <returns>Task operation with result true if user was successfully delete, false otherwise</returns>
         public async Task<bool> DeleteUserAsync(int id)
         {
@@ -87,13 +87,15 @@ namespace ProjektSemestralnyOOP.Services
         public async Task RegisterUserAsync(User user)
         {
             // DO NAPRAWY!!!
-            bool ifExists = await _context.Users.AnyAsync(x => x.Id == user.Id);
+            bool ifExists = await _context.Users.AnyAsync(x => x.Login == user.Login || x.Username == user.Username);
             if (!ifExists)
             {
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
                 return;
             }
+
+            MessageBox.Show("This username or login is already taken. Try again.", "Info");
         }
 
         /// <summary>

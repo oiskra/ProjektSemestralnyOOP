@@ -177,6 +177,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             Username = UsernameToUpdate;
             Login = LoginToUpdate;
             Password = PasswordToUpdate;
+
+            MessageBox.Show("User account updated successfully.", "Info");
+
         }
 
         private async void OnProfileInfoUpdated()

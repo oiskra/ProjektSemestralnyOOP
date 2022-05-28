@@ -19,9 +19,10 @@ namespace ProjektSemestralnyOOP
     {
         protected void OnStartup(object sender, StartupEventArgs e)
         {
-            //new mediatior
+            RacingDBContext context = new RacingDBContextFactory().CreateDbContext();
+            DbSeeder.Seed(context);
             ViewModelMediator mediator = new();
-            MainWindow main = new MainWindow()
+            MainWindow main = new()
             {
                 DataContext = new MainViewModel(mediator)
             };

@@ -81,14 +81,14 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             if (loggedUser is User)
             {
                 _mediator.LoginUser(loggedUser);
-                MessageBox.Show("True", "islogged?");
+                MessageBox.Show($"You logged in as {loggedUser.Username}", "Info");
                 _window.Hide();
                 Password = null;
                 Login = null;
                 return;
             }
 
-            MessageBox.Show("False", "islogged?");
+            MessageBox.Show("Failed to login, try again", "Info");
         }
     }
 }

@@ -6,6 +6,7 @@ using ProjektSemestralnyOOP.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
@@ -85,7 +86,14 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             SelectedCar = null;
         }
 
-        private async void ChallengeCommand() 
-            => await _raceService.CreateRaceAsync(_loggedUser.Username, ChallengedUsername, SelectedCar);
+        private async void ChallengeCommand()
+        {
+            if(SelectedCar is null)
+            {
+                MessageBox.Show("You have to select a car you want to race with.", "Info");
+                return;
+            }
+            await _raceService.CreateRaceAsync(_loggedUser.Username, ChallengedUsername, SelectedCar);
+        }
     }
 }

@@ -29,16 +29,22 @@ namespace ProjektSemestralnyOOP.Services
         }
 
         /// <summary>
-        /// 
+        /// Method that asynchronously inserts new entry to Race Table in database. 
         /// </summary>
-        /// <param name="loggedUsername"></param>
-        /// <param name="challengedUsername"></param>
-        /// <param name="loggedUserCar"></param>
+        /// <param name="loggedUsername"><see cref="User.Username"/> assigned to new <see cref="Race"/> entry.</param>
+        /// <param name="challengedUsername"><see cref="User.Username"/> assigned to new <see cref="Race"/> entry.</param>
+        /// <param name="loggedUserCar">Object of <see cref="Car"/> class selected by logged User.</param>
         /// <returns><see cref="Task"/></returns>
         public async Task CreateRaceAsync(string loggedUsername, string challengedUsername, Tuple<Car, Statistic> loggedUserCar)
         {
             User loggedUser = await _context.Users.Where(x => x.Username == loggedUsername).FirstOrDefaultAsync();
             User challengedUser = await _context.Users.Where(x => x.Username == challengedUsername).FirstOrDefaultAsync();
+            if(challengedUser is null)
+            {
+                MessageBox.Show("There is no user with provided username. Try Again", "Info");
+                return;
+            }
+
             List<Tuple<Car, Statistic>> challengedCarList = await _carService.ReadCarsAsync(challengedUser.Id);
 
             if (challengedCarList.Count == 0)
@@ -92,6 +98,7 @@ namespace ProjektSemestralnyOOP.Services
 
             await _context.Races.AddAsync(newRace);
             await _context.SaveChangesAsync();
+            MessageBox.Show($"Race finished! The winner is {winner.ToUpper()}");
         }
 
         /// <summary>

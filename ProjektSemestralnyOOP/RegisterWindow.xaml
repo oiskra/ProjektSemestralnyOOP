@@ -25,6 +25,42 @@
         </Rectangle>
 
         <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#0f004a"/>
+                    <Setter Property="Foreground" Value="white"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Border x:Name="border" 
+                                            CornerRadius="10" 
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter Content="{TemplateBinding Content}"
+                                                          HorizontalAlignment="Center" 
+                                                          VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#100e31"/>
+                                        <Setter Property="Foreground" Value="SlateGray"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#100e3a"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                </Style>
+                
+            </StackPanel.Resources>
             
             <TextBlock Text="REGISTER"
                        Margin="0 25 0 0"
@@ -54,7 +90,7 @@
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
                      FontFamily="Segoe UI Light"
-                     Text="{Binding Username}">
+                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -74,7 +110,7 @@
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
                      FontFamily="Segoe UI Light"
-                     Text="{Binding Login}">
+                     Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -94,7 +130,7 @@
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"
                      FontFamily="pack://application:,,,/Resources/#password"
-                     Text="{Binding Password}">
+                     Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -103,37 +139,21 @@
             </TextBox>
 
 
-
             <Button Height="35" 
                     Width="175"
                     Margin="0 30 0 0"
-                    Background="#0f004a"
                     Cursor="Hand"
                     Content="SIGN UP"
-                    Foreground="White"
-                    BorderBrush="Black"
-                    Command="{Binding SubmitCommand}">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+                    Command="{Binding SubmitCommand}"/>
+
             <Button Height="35" 
                     Width="175"
                     Margin="0 10 0 0"
-                    Background="#0f004a"
                     Cursor="Hand"
                     Content="CANCEL"
-                    Foreground="White"
-                    BorderBrush="Black"
-                    Command="{Binding CancelCommand}">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+                    Command="{Binding CancelCommand}"/>
+
+
 
         </StackPanel>
 

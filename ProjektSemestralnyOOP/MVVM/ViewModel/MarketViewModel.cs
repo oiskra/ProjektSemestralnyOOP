@@ -73,6 +73,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 return;
             }
             await _service.BuyCarAsync(SelectedCar.Item1.Id, _loggedUser.Id);
+            MessageBox.Show($"You bought {SelectedCar.Item1.Brand} {SelectedCar.Item1.Model}.", "Info");
             AssignListFromDb();
         }
 

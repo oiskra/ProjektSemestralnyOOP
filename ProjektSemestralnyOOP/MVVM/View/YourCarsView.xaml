@@ -244,11 +244,37 @@
                         Margin="0 5 0 0"
                         Content="Challenge User"
                         FontSize="15"
-                        Foreground="Black"
-                        Background="#fffa"
+                        Cursor="Hand"
                         BorderBrush="#100e31"
                         FontFamily="Segoe UI Light"
-                        Command="{Binding ChallengeButton}"/>
+                        Command="{Binding ChallengeButton}">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="#fffa"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <ContentPresenter Content="{TemplateBinding Content}"
+                                                      HorizontalAlignment="Center" 
+                                                      VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" Value="#ccfa"/>
+                                    <Setter Property="Foreground" Value="SlateGray"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#fff8"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
             </StackPanel>
         </Grid>

@@ -34,8 +34,9 @@
                           SelectedItem ="{Binding SelectedCar}" 
                           FontFamily="Segoe UI Light" 
                           Foreground="White"
-                          Margin="19 0 19 0" 
-                          Height="350" 
+                          Margin="30 0 30 0" 
+                          Padding="0 0 6 0"
+                          Height="350"
                           Background="Transparent" 
                           BorderThickness="0">
                     <ListView.ItemContainerStyle>
@@ -83,10 +84,10 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn Header="Statistics" Width="100">
+                            <GridViewColumn Header="Statistics" Width="105">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel Margin=" 0 5 0 5">
+                                        <StackPanel Margin=" 0 5 0 5" HorizontalAlignment="Center">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Speed" Margin="0 0 35 0"/>
                                                 <TextBlock Text="{Binding Item2.Speed}"/>
@@ -125,7 +126,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             
-                            <GridViewColumn Header="User ID" Width="100">
+                            <GridViewColumn Header="User ID" Width="90">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock HorizontalAlignment="Center" Text="{Binding Item1.UserId}"/>

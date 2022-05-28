@@ -98,9 +98,10 @@
         </StackPanel>
 
         <TextBlock Text="Object Oriented Programming Project - Olaf Iskra"
+                   VerticalAlignment="Bottom"
                     Foreground="White"
                     Grid.Row="3"
-                    FontSize="15"
+                    FontSize="10"
                     TextWrapping="Wrap"
                     FontFamily="Segoe UI Light"
                     Margin="10 0 5 10"/>

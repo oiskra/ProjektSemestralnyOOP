@@ -23,16 +23,16 @@ namespace ProjektSemestralnyOOP.DBcontext
 
             var cars = new Car[]
             {
-                new Car {Id = 1, Brand = "Dodge", Model = "Charger", IsAvailable = true, UserId = null, Price = 600},
-                new Car {Id = 2, Brand = "Acura", Model = "NSX", IsAvailable = true, UserId = null, Price = 1000},
-                new Car {Id = 3, Brand = "Mitsubishi", Model = "Lancer EVO X", IsAvailable = true, UserId = null, Price = 1000},
-                new Car {Id = 4, Brand = "Toyota", Model = "GT86", IsAvailable = true, UserId = null, Price = 500},
-                new Car {Id = 5, Brand = "Toyota", Model = "AE86 Trueno", IsAvailable = true, UserId = null, Price = 4000},
-                new Car {Id = 6, Brand = "Mazda", Model = "RX-7", IsAvailable = true, UserId = null, Price = 1100},
-                new Car {Id = 7, Brand = "Nissan", Model = "GTR R34", IsAvailable = true, UserId = null, Price = 2300},
-                new Car {Id = 8, Brand = "Toyota", Model = "Supra", IsAvailable = true, UserId = null, Price = 2500},
-                new Car {Id = 9, Brand = "Lexus", Model = "IS200", IsAvailable = true, UserId = null, Price = 1600},
-                new Car {Id = 10, Brand = "Nissan", Model = "370Z", IsAvailable = true, UserId = null, Price = 2000}
+                new Car {Brand = "Dodge", Model = "Charger", IsAvailable = true, UserId = null, Price = 600},
+                new Car {Brand = "Acura", Model = "NSX", IsAvailable = true, UserId = null, Price = 1000},
+                new Car {Brand = "Mitsubishi", Model = "Lancer EVO X", IsAvailable = true, UserId = null, Price = 1000},
+                new Car {Brand = "Toyota", Model = "GT86", IsAvailable = true, UserId = null, Price = 500},
+                new Car {Brand = "Toyota", Model = "AE86 Trueno", IsAvailable = true, UserId = null, Price = 4000},
+                new Car {Brand = "Mazda", Model = "RX-7", IsAvailable = true, UserId = null, Price = 1100},
+                new Car {Brand = "Nissan", Model = "GTR R34", IsAvailable = true, UserId = null, Price = 2300},
+                new Car {Brand = "Toyota", Model = "Supra", IsAvailable = true, UserId = null, Price = 2500},
+                new Car {Brand = "Lexus", Model = "IS200", IsAvailable = true, UserId = null, Price = 1600},
+                new Car {Brand = "Nissan", Model = "370Z", IsAvailable = true, UserId = null, Price = 2000}
             };
 
             await context.Market.AddRangeAsync(cars);

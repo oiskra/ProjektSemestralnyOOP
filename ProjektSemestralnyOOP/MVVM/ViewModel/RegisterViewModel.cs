@@ -3,6 +3,7 @@ using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using ProjektSemestralnyOOP.Services;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
@@ -102,6 +103,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             Username = null;
             Login = null;
             Password = null;
+
+            MessageBox.Show("User register successfully.", "Info");
         }
     }
 }
