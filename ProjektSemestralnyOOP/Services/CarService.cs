@@ -47,6 +47,7 @@ namespace ProjektSemestralnyOOP.Services
             car.UserId = userId;
             user.Money -= car.Price;
             await _context.SaveChangesAsync();
+            MessageBox.Show($"You bought {car.Brand} {car.Model}.", "Info");
         }
 
         /// <summary>
@@ -111,6 +112,7 @@ namespace ProjektSemestralnyOOP.Services
                 car.UserId = null;
                 user.Money += car.Price;
                 await _context.SaveChangesAsync();
+                MessageBox.Show($"You sold {car.Brand} {car.Model}.", "Info");
             }
         }
 

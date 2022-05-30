@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Title="Aplikacja" 
         Height="600" Width="1000"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Converter" />
     </Window.Resources>
@@ -101,7 +102,7 @@
                    VerticalAlignment="Bottom"
                     Foreground="White"
                     Grid.Row="3"
-                    FontSize="10"
+                    FontSize="11"
                     TextWrapping="Wrap"
                     FontFamily="Segoe UI Light"
                     Margin="10 0 5 10"/>
