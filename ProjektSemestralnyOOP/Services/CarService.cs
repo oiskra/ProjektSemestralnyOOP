@@ -5,6 +5,7 @@ using ProjektSemestralnyOOP.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -55,16 +56,48 @@ namespace ProjektSemestralnyOOP.Services
         /// </summary>
         /// <param name="entity"><see cref="Car"/> object inserted to DB.</param>
         /// <returns><see cref="Task"/></returns>
-        public async Task CreateCarAsync(Car entity)
+        public async Task CreateCarAsync(Car carEntity, Statistic statisticEntity)
         {
-            await _context.Market.AddAsync(entity);
-            await _context.SaveChangesAsync();
+
+            Match brandValidator = Regex.Match(carEntity.Brand, @"^(\D{3,20})$|^(\D{3,20}\s{1}\D{3,20})$");
+            Match modelValidator = Regex.Match(carEntity.Model, @"^(\w{1,10})$|^(\w{1,10}\s{1}\w{1,10})$");
+
+            if (brandValidator.Success && modelValidator.Success)
+            {
+                using (var transaction = await _context.Database.BeginTransactionAsync())
+                {
+                    try
+                    {
+                        var ok = await _context.Market.AddAsync(carEntity);
+                        await _context.SaveChangesAsync();
+
+                        statisticEntity.CarId = ok.Entity.Id;
+                        /*if (a) await AddStatistic(statisticEntity);
+                        else MessageBox.Show("asd");*/
+                        await AddStatistic(statisticEntity);
+                        await transaction.CommitAsync();
+                        MessageBox.Show("Car created successfully", "Info");
+                        return;
+
+                    }
+                    catch (ArgumentException e)
+                    {
+                        await transaction.RollbackAsync();
+                        MessageBox.Show(e.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+                
+            }
+            MessageBox.Show("Wrong values for brand or model.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+
         }
 
         /// <summary>
         /// Method that returns list of cars with assigned userId passed in parameter.
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="userId">Id of <see cref="User"> that assigned cars need to be returned</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains a
         /// <see cref="List{T}"/> that contains elements from the input sequence.</returns>
         public async Task<List<Tuple<Car,Statistic>>> ReadCarsAsync(int userId)
@@ -123,15 +156,18 @@ namespace ProjektSemestralnyOOP.Services
         /// <returns><see cref="Task"/></returns>
         public async Task AddStatistic(Statistic entity)
         {
-            try
-            {
-                await _context.Statistics.AddAsync(entity);
-                await _context.SaveChangesAsync();
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.ToString());   
-            }
+            Regex statisticValidator = new(@"(^[1-9]$)|(^[1][0]$)");
+            bool statisticSuccess = statisticValidator.IsMatch(entity.Speed.ToString())
+                && statisticValidator.IsMatch(entity.Acceleration.ToString())
+                && statisticValidator.IsMatch(entity.Grip.ToString())
+                && statisticValidator.IsMatch(entity.Braking.ToString());
+
+            if(!statisticSuccess)
+                throw new ArgumentException("Statistic values have to be in range of 1 to 10");
+
+            await _context.Statistics.AddAsync(entity);
+            await _context.SaveChangesAsync();
+
         }
     }
 }

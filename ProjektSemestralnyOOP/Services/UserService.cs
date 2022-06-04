@@ -3,6 +3,7 @@ using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -86,7 +87,14 @@ namespace ProjektSemestralnyOOP.Services
         /// <returns><see cref="Task"/></returns>
         public async Task RegisterUserAsync(User user)
         {
-            // DO NAPRAWY!!!
+            Regex userValidator = new(@"^\w{7,}$");
+            bool match = userValidator.IsMatch(user.Username) && userValidator.IsMatch(user.Login) && userValidator.IsMatch(user.Password);
+            if(!match)
+            {
+                MessageBox.Show("Username, login and password must be at least 7 characters long", "Info");
+                return;
+            }
+
             bool ifExists = await _context.Users.AnyAsync(x => x.Login == user.Login || x.Username == user.Username);
             if (!ifExists)
             {
@@ -103,8 +111,16 @@ namespace ProjektSemestralnyOOP.Services
         /// </summary>
         /// <param name="updatedUser"><see cref="User"/> object with values to update.</param>
         /// <returns><see cref="Task"/></returns>
-        public async Task UpdateUserAsync(User updatedUser)
+        public async Task<bool> UpdateUserAsync(User updatedUser)
         {
+            Regex userValidator = new(@"^\w{7,}$");
+            bool match = userValidator.IsMatch(updatedUser.Username) && userValidator.IsMatch(updatedUser.Login) && userValidator.IsMatch(updatedUser.Password);
+            if (!match)
+            {
+                MessageBox.Show("Username, login and password must be at least 7 characters long", "Info");
+                return false;
+            }
+
             User user = await _context.Users.FirstOrDefaultAsync(x => x.Id == updatedUser.Id);
 
             user.Username = updatedUser.Username;
@@ -112,6 +128,8 @@ namespace ProjektSemestralnyOOP.Services
             user.Password = updatedUser.Password;
             
             await _context.SaveChangesAsync();
+            MessageBox.Show("User account updated successfully.", "Info");
+            return true;
         }
     }
 }

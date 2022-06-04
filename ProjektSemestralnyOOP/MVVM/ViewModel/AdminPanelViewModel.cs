@@ -162,36 +162,37 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private async void CreateCarCommand()
         {
-            try
+            int speedParsed = 0, accelerationParsed = 0, gripParsed = 0, brakingParsed = 0;
+
+            bool parseSuccess = int.TryParse(Speed, out speedParsed)
+                && int.TryParse(Acceleration, out accelerationParsed)
+                && int.TryParse(Grip, out gripParsed)
+                && int.TryParse(Braking, out brakingParsed);
+
+            if(!parseSuccess)
             {
-                Statistic newStatistic = new()
-                {
-                    Speed = int.Parse(Speed),
-                    Acceleration = int.Parse(Acceleration),
-                    Grip = int.Parse(Grip),
-                    Braking = int.Parse(Braking)
-                };
-
-                Car newCar = new()
-                {
-                    Brand = Brand,
-                    Model = Model,
-                    IsAvailable = true,
-                    Price = (newStatistic.Braking + newStatistic.Grip + newStatistic.Acceleration + newStatistic.Speed) * 100,
-                    UserId = null
-                };
-
-                newStatistic.CarId = newCar.Id;
-
-                await _carService.CreateCarAsync(newCar);
-                await _carService.AddStatistic(newStatistic);
-                MessageBox.Show("Car created successfully", "Info");
-
+                MessageBox.Show("Statistic values have to be numbers", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            catch (FormatException)
+
+            Statistic newStatistic = new()
             {
-                MessageBox.Show("Wrong input values", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                Speed = speedParsed,
+                Acceleration = accelerationParsed,
+                Grip = gripParsed,
+                Braking = brakingParsed
+            };
+
+            Car newCar = new()
+            {
+                Brand = Brand,
+                Model = Model,
+                IsAvailable = true,
+                Price = (newStatistic.Braking + newStatistic.Grip + newStatistic.Acceleration + newStatistic.Speed) * 100,
+                UserId = null
+            };
+
+            await _carService.CreateCarAsync(newCar, newStatistic);
         }
 
         private async void DeleteUserCommand()

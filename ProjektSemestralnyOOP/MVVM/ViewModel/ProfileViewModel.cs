@@ -12,6 +12,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     /// </summary>
     public class ProfileViewModel : BaseViewModel
     {
+        private readonly IUserService _userService;
         private readonly ViewModelMediator _mediator; 
         private readonly User _loggedUser;
 
@@ -141,6 +142,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             _mediator = mediator;
             _mediator.ProfileInfoUpdated += OnProfileInfoUpdated;
             _loggedUser = user;
+            _userService = new UserService(new());
 
             _usernameToUpdate = _loggedUser.Username;
             _loginToUpdate = _loggedUser.Login;
@@ -171,21 +173,18 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 Money = Money
             };
 
-            IUserService service = new UserService(new());
-            await service.UpdateUserAsync(updatedUser);
-
-            Username = UsernameToUpdate;
-            Login = LoginToUpdate;
-            Password = PasswordToUpdate;
-
-            MessageBox.Show("User account updated successfully.", "Info");
-
+            bool isUpdated = await _userService.UpdateUserAsync(updatedUser);
+            if (isUpdated)
+            {
+                Username = UsernameToUpdate;
+                Login = LoginToUpdate;
+                Password = PasswordToUpdate;
+            }
         }
 
         private async void OnProfileInfoUpdated()
         {
-            IUserService userService = new UserService(new());
-            User user = await userService.ReadUserAsync(_loggedUser.Id);
+            User user = await _userService.ReadUserAsync(_loggedUser.Id);
             Id = user.Id;
             Username = user.Username;
             Login = user.Login;

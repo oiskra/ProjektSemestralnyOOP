@@ -52,14 +52,10 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             _loggedUser = loggedUser;
         }
 
-        private async void SeeYoursCommand()
-        {
-            Races = new ObservableCollection<Race>(await _raceService.ReadRaceAsync(_loggedUser.Id));
-        }
+        private async void SeeYoursCommand() 
+            => Races = new ObservableCollection<Race>(await _raceService.ReadRaceAsync(_loggedUser.Id));
 
-        private async void SeeAllCommand()
-        {
-            Races = new ObservableCollection<Race>(await _raceService.ReadAllRacesAsync());
-        }
+        private async void SeeAllCommand() 
+            => Races = new ObservableCollection<Race>(await _raceService.ReadAllRacesAsync());
     }
 }
