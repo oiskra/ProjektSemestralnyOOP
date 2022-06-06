@@ -1,0 +1,778 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProjektSemestralnyOOP</name>
+    </assembly>
+    <members>
+        <member name="T:ProjektSemestralnyOOP.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.Commands.RelayCommand">
+            <summary>
+            Class that can expose a method or delegate to the view. These types act as a way to bind commands between the viewmodel and UI elements.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Commands.RelayCommand.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of <see cref="T:ProjektSemestralnyOOP.Commands.RelayCommand"/>.
+            </summary>
+            <param name="execute"></param>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Commands.RelayCommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>
+            Initializes a new instance of <see cref="T:ProjektSemestralnyOOP.Commands.RelayCommand"/>.
+            </summary>
+            <param name="execute"><see cref="T:System.Action"/> delegate for command logic.</param>
+            <param name="canExecute">Function for defining whether the command can or cannot be executed.</param>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.DBcontext.DbSeeder">
+            <summary>
+            Class responsible for seeding database.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.DBcontext.DbSeeder.Seed(ProjektSemestralnyOOP.DBcontext.RacingDBContext)">
+            <summary>
+            Method that asynchronously seeds the database with specified entries.
+            </summary>
+            <param name="context">Database context to seed</param>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.DBcontext.RacingDBContext">
+            <summary>
+            Class that represents RacingDatabase. Used to access tables throught C#.
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.DBcontext.RacingDBContextFactory">
+            <summary>
+            Class for creating of database context. 
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.DBcontext.RacingDBContextFactory.CreateDbContext(System.String[])">
+            <summary>
+            Method for creating <see cref="T:ProjektSemestralnyOOP.DBcontext.RacingDBContext"/> instance.
+            </summary>
+            <param name="args"></param>
+            <returns>New instance of <see cref="T:ProjektSemestralnyOOP.DBcontext.RacingDBContext"/></returns>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.Interfaces.ICarService">
+            <summary>Defines methods that operate with database and Car entity</summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.Interfaces.IRaceService">
+            <summary>Defines methods that operate with database and Race entity</summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.Interfaces.IUserService">
+            <summary>Defines methods that operate with database and User entity</summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.LoginWindow">
+            <summary>
+            Logika interakcji dla klasy LoginWindow.xaml
+            </summary>
+            <summary>
+            LoginWindow
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.LoginWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel">
+            <summary>
+            Provides interaction logic for AdminPanel view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.Users">
+            <summary>
+            Provides collection of users from database.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.IdToDelete">
+            <summary>
+            Contains ID of a user that has to be deleted from the database.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.Brand">
+            <summary>
+            Contains brand component for new Car model.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.Model">
+            <summary>
+            Contains model component for new Car model.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.Speed">
+            <summary>
+            Contains speed component for new Car model.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.Acceleration">
+            <summary>
+            Contains acceleration component for new Car model.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.Grip">
+            <summary>
+            Contains grip component for new Car model.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.Braking">
+            <summary>
+            Contains Braking component for new Car model.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.DeleteUserButton">
+            <summary>
+            Provides a command for deleting user from the database.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.CreateCarButton">
+            <summary>
+            Provides a command for inserting new Car into the database.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.AdminPanelViewModel.#ctor(ProjektSemestralnyOOP.MVVM.Model.User)">
+            <summary>
+            Initializes a new instance of the AdminPanel class
+            </summary>
+            <param name="loggedUser">Object of logged in user</param>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.BaseViewModel">
+            <summary>
+            Base class for all viewmodels
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.LoginViewModel">
+            <summary>
+            Provides interaction logic for Login view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.LoginViewModel.Login">
+            <summary>
+            Contains login component for Login Form.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.LoginViewModel.Password">
+            <summary>
+            Contains password component for Login Form.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.LoginViewModel.SubmitButton">
+            <summary>
+            Provides a command for submitting login form.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.LoginViewModel.CancelButton">
+            <summary>
+            Provides a command for canceling login form.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.LoginViewModel.#ctor(ProjektSemestralnyOOP.LoginWindow,ProjektSemestralnyOOP.Services.ViewModelMediator)">
+            <summary>
+            Initializes a new instance of the LoginViewModel class
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel">
+            <summary>
+            Provides interaction logic for MainWindow view
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.CurrentView">
+            <summary>
+            Determines the current view for the application.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.ShowAdminButton">
+            <summary>
+            Determines whether the admin panel button should be shown or not.
+            </summary>
+            <value>True if logged user is an Admin, false for every other user</value>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.ProfileButton">
+            <summary>
+            Provides a navigation command to Profile view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.MarketButton">
+            <summary>
+            Provides a navigation command to Market view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.YourCarsButton">
+            <summary>
+            Provides a navigation command to YourCars view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.RacesButton">
+            <summary>
+            Provides a navigation command to Races view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.AdminPanelButton">
+            <summary>
+            Provides a navigation command to AdminPanel view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.LogOutButton">
+            <summary>
+            Provides a command for user to log out
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.MainViewModel.#ctor(ProjektSemestralnyOOP.Services.ViewModelMediator)">
+            <summary>
+            Initializes a new instance of the MainViewModel class
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.MarketViewModel">
+            <summary>
+            Provides interaction logic for Market view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MarketViewModel.MarketCars">
+            <summary>
+            Provides collection of cars from database.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MarketViewModel.SelectedCar">
+            <summary>
+            Contains selected object from the MarketCars collection
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MarketViewModel.BuyButton">
+            <summary>
+            Provides a command for buying car.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.MarketViewModel.SellButton">
+            <summary>
+            Provides a command for selling car.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.MarketViewModel.#ctor(ProjektSemestralnyOOP.MVVM.Model.User,ProjektSemestralnyOOP.Services.ViewModelMediator)">
+            <summary>
+            Initializes a new instance of the MarketViewModel class
+            </summary>
+            <param name="loggedUser">Object of logged in user</param>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel">
+            <summary>
+            Provides interaction logic for Profile view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.Id">
+            <summary>
+            Contains ID component to display in view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.Username">
+            <summary>
+            Contains username component to display in view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.Login">
+            <summary>
+            Contains login component to display in view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.Password">
+            <summary>
+            Contains password component to display in view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.Money">
+            <summary>
+            Contains money component to display in view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.UsernameToUpdate">
+            <summary>
+            Contains updated username component.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.LoginToUpdate">
+            <summary>
+            Contains updated login component.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.PasswordToUpdate">
+            <summary>
+            Contains updated password component.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.UpdateButton">
+            <summary>
+            Provides a command for updating user info
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.ProfileViewModel.#ctor(ProjektSemestralnyOOP.MVVM.Model.User,ProjektSemestralnyOOP.Services.ViewModelMediator)">
+            <summary>
+            Initializes a new instance of the ProfileViewModel class
+            </summary>
+            <param name="loggedUser">Object of logged in user</param>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.RacesViewModel">
+            <summary>
+            Provides interaction logic for Races view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.RacesViewModel.Races">
+            <summary>
+            Provides collection of races from database.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.RacesViewModel.SeeAllButton">
+            <summary>
+            Provides a command for displaying all races in view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.RacesViewModel.SeeYoursButton">
+            <summary>
+            Provides a command for displaying logged user races in view.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.RacesViewModel.#ctor(ProjektSemestralnyOOP.MVVM.Model.User)">
+            <summary>
+            Initializes a new instance of the RacesViewModel class
+            </summary>
+            <param name="loggedUser">Object of logged in user</param>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.RegisterViewModel">
+            <summary>
+            Provides interaction logic for Register view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.RegisterViewModel.Username">
+            <summary>
+            Contains username component for Register Form.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.RegisterViewModel.Login">
+            <summary>
+            Contains login component for Register Form.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.RegisterViewModel.Password">
+            <summary>
+            Contains password component for Register Form.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.RegisterViewModel.SubmitCommand">
+            <summary>
+            Provides a command for submitting register form.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.RegisterViewModel.CancelCommand">
+            <summary>
+            Provides a command for canceling login form.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.RegisterViewModel.#ctor(ProjektSemestralnyOOP.RegisterWindow)">
+            <summary>
+            Initializes a new instance of the RegisterViewModel class
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.StartUpViewModel">
+            <summary>
+            Provides interaction logic for StartUp view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.StartUpViewModel.LoginButton">
+            <summary>
+            Provides a command for displaying Login form window.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.StartUpViewModel.RegisterButton">
+            <summary>
+            Provides a command for displaying Register form window.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.StartUpViewModel.#ctor(ProjektSemestralnyOOP.LoginWindow,ProjektSemestralnyOOP.RegisterWindow,ProjektSemestralnyOOP.Services.ViewModelMediator)">
+            <summary>
+            Initializes a new instance of the StartUpViewModel class
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.ViewModel.YourCarsViewModel">
+            <summary>
+            Provides interaction logic for YourCars view.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.YourCarsViewModel.YourCars">
+            <summary>
+            Provides collection of logged user's cars from database.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.YourCarsViewModel.SelectedCar">
+            <summary>
+            Contains selected object from the YourCars collection
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.YourCarsViewModel.ChallengedUsername">
+            <summary>
+            Contains username of a user that logged user is challenging.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.MVVM.ViewModel.YourCarsViewModel.ChallengeButton">
+            <summary>
+            Provides a command for inserting new Race into the database.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.ViewModel.YourCarsViewModel.#ctor(ProjektSemestralnyOOP.MVVM.Model.User,ProjektSemestralnyOOP.Services.ViewModelMediator)">
+            <summary>
+            Initializes a new instance of the YourCarsViewModel class
+            </summary>
+            <param name="loggedUser">Object of logged in user</param>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.View.AdminPanelView">
+            <summary>
+            Logika interakcji dla klasy AdminPanelView.xaml
+            </summary>
+            <summary>
+            AdminPanelView
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.View.AdminPanelView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.View.MarketView">
+            <summary>
+            Logika interakcji dla klasy MarketView.xaml
+            </summary>
+            <summary>
+            MarketView
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.View.MarketView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.View.ProfileView">
+            <summary>
+            Logika interakcji dla klasy ProfileView.xaml
+            </summary>
+            <summary>
+            ProfileView
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.View.ProfileView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.View.RacesView">
+            <summary>
+            Logika interakcji dla klasy RacesView.xaml
+            </summary>
+            <summary>
+            RacesView
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.View.RacesView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.View.StartUpView">
+            <summary>
+            Logika interakcji dla klasy StartUpView.xaml
+            </summary>
+            <summary>
+            StartUpView
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.View.StartUpView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.MVVM.View.YourCarsView">
+            <summary>
+            Logika interakcji dla klasy YourCarsView.xaml
+            </summary>
+            <summary>
+            YourCarsView
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.MVVM.View.YourCarsView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.Properties.Resources">
+            <summary>
+              Klasa zasobu wymagająca zdefiniowania typu do wyszukiwania zlokalizowanych ciągów itd.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.Properties.Resources.ResourceManager">
+            <summary>
+            Zwraca buforowane wystąpienie ResourceManager używane przez tę klasę.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.Properties.Resources.Culture">
+            <summary>
+              Przesłania właściwość CurrentUICulture bieżącego wątku dla wszystkich
+              przypadków przeszukiwania zasobów za pomocą tej klasy zasobów wymagającej zdefiniowania typu.
+            </summary>
+        </member>
+        <member name="P:ProjektSemestralnyOOP.Properties.Resources.password">
+            <summary>
+              Wyszukuje zlokalizowany zasób typu System.Byte[].
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.RegisterWindow">
+            <summary>
+            Logika interakcji dla klasy RegisterWindow.xaml
+            </summary>
+            <summary>
+            RegisterWindow
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.RegisterWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.Services.CarService">
+            <summary>
+            Provides methods that operate with database and <see cref="T:ProjektSemestralnyOOP.MVVM.Model.Car"/> entity 
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.CarService.#ctor(ProjektSemestralnyOOP.DBcontext.RacingDBContextFactory)">
+            <summary>
+            Initializes new instance of <see cref="T:ProjektSemestralnyOOP.Services.CarService"/> class.
+            </summary>
+            <param name="contextFactory">ContextFactory object for creating new DBcontext</param>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.CarService.BuyCarAsync(System.Int32,System.Int32)">
+            <summary>
+            Method that asynchronously selects row by id ( param <b>carId</b> ) from DB.
+            Sets <see cref="P:ProjektSemestralnyOOP.MVVM.Model.Car.IsAvailable"/> to false and <see cref="P:ProjektSemestralnyOOP.MVVM.Model.Car.UserId"/> to userID passed in parameter
+            </summary>
+            <param name="carId">Id of a <see cref="T:ProjektSemestralnyOOP.MVVM.Model.Car"/> that needs to be updated</param>
+            <param name="userId">Id of a <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> that will be assigned to selected row</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.CarService.CreateCarAsync(ProjektSemestralnyOOP.MVVM.Model.Car,ProjektSemestralnyOOP.MVVM.Model.Statistic)">
+            <summary>
+            Method that asynchronously adds a new entry to database Market Table.
+            </summary>
+            <param name="entity"><see cref="T:ProjektSemestralnyOOP.MVVM.Model.Car"/> object inserted to DB.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ProjektSemestralnyOOP.Services.CarService.ReadCarsAsync(System.Int32)" -->
+        <member name="M:ProjektSemestralnyOOP.Services.CarService.ReadMarketAsync">
+            <summary>
+            Method that returns entire Market Table from database as a list.
+            </summary>
+            <returns>Task with result of List of <see cref="T:System.Tuple`2"/> objects.</returns>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.CarService.SellCarAsync(System.Int32,System.Int32)">
+            <summary>
+            Method that asynchronously selects row by id ( param <b>carId</b> ) from DB.
+            Sets <see cref="P:ProjektSemestralnyOOP.MVVM.Model.Car.IsAvailable"/> to true and <see cref="P:ProjektSemestralnyOOP.MVVM.Model.Car.UserId"/> to null.
+            </summary>
+            <param name="carId">Id of a <see cref="T:ProjektSemestralnyOOP.MVVM.Model.Car"/> that needs to be updated</param>
+            <param name="userId">Id of a <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> assigned to selected row</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.CarService.AddStatistic(ProjektSemestralnyOOP.MVVM.Model.Statistic)">
+            <summary>
+            Method that asynchronously adds a new entry to database Statistic Table.
+            </summary>
+            <param name="entity"><see cref="T:ProjektSemestralnyOOP.MVVM.Model.Statistic"/> object inserted to DB.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.Services.RaceService">
+            <summary>
+            Provides methods that operate with database and <see cref="T:ProjektSemestralnyOOP.MVVM.Model.Race"/> entity 
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.RaceService.#ctor(ProjektSemestralnyOOP.DBcontext.RacingDBContextFactory)">
+            <summary>
+            Initializes new instance of <see cref="T:ProjektSemestralnyOOP.MVVM.Model.Race"/> class
+            </summary>
+            <param name="contextFactory">ContextFactory object for creating new DBcontext</param>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.RaceService.CreateRaceAsync(System.String,System.String,System.Tuple{ProjektSemestralnyOOP.MVVM.Model.Car,ProjektSemestralnyOOP.MVVM.Model.Statistic})">
+            <summary>
+            Method that asynchronously inserts new entry to Race Table in database. 
+            </summary>
+            <param name="loggedUsername"><see cref="P:ProjektSemestralnyOOP.MVVM.Model.User.Username"/> assigned to new <see cref="T:ProjektSemestralnyOOP.MVVM.Model.Race"/> entry.</param>
+            <param name="challengedUsername"><see cref="P:ProjektSemestralnyOOP.MVVM.Model.User.Username"/> assigned to new <see cref="T:ProjektSemestralnyOOP.MVVM.Model.Race"/> entry.</param>
+            <param name="loggedUserCar">Object of <see cref="T:ProjektSemestralnyOOP.MVVM.Model.Car"/> class selected by logged User.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ProjektSemestralnyOOP.Services.RaceService.ReadAllRacesAsync" -->
+        <!-- Badly formed XML comment ignored for member "M:ProjektSemestralnyOOP.Services.RaceService.ReadRaceAsync(System.Int32)" -->
+        <member name="T:ProjektSemestralnyOOP.Services.UserService">
+            <summary>
+            Provides methods that operate with database and User entity 
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.UserService.#ctor(ProjektSemestralnyOOP.DBcontext.RacingDBContextFactory)">
+            <summary>
+            Initializes new instance of <see cref="T:ProjektSemestralnyOOP.Services.UserService"/> class
+            </summary>
+            <param name="contextFactory">ContextFactory object for creating new DBcontext</param>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.UserService.DeleteUserAsync(System.Int32)">
+            <summary>
+            Method that asynchronously deletes user from DB with provided id. 
+            </summary>
+            <param name="id">Id of <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> to delete.</param>
+            <returns>Task operation with result true if user was successfully delete, false otherwise</returns>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.UserService.LoginUserAsync(System.String,System.String)">
+            <summary>
+            Method that asynchronously searches for <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> in database by provided login and password.
+            </summary>
+            <param name="login"><see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> property Login.</param>
+            <param name="password"><see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> property Password.</param>
+            <returns>Task with result of <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> if such exists, and null otherwise.</returns>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.UserService.ReadAllAsync">
+            <summary>
+            Method that asynchronously returns entire User Table from database. 
+            </summary>
+            <returns>Task with result of List of <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> objects.</returns>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.UserService.ReadUserAsync(System.Int32)">
+            <summary>
+            Method that asynchronously finds and returns <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> with provided id. 
+            </summary>
+            <param name="id">Id of <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> that needs to be found.</param>
+            <returns>Task with result of <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> object.</returns>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.UserService.RegisterUserAsync(ProjektSemestralnyOOP.MVVM.Model.User)">
+            <summary>
+            Method that asynchronously creates a new database entry based on provided <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> object.
+            </summary>
+            <param name="user"><see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> that is inserted to database.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.UserService.UpdateUserAsync(ProjektSemestralnyOOP.MVVM.Model.User)">
+            <summary>
+            Method that asynchronously find a <see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> in database and updates columns: Login, Password, Username.
+            </summary>
+            <param name="updatedUser"><see cref="T:ProjektSemestralnyOOP.MVVM.Model.User"/> object with values to update.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="T:ProjektSemestralnyOOP.Services.ViewModelMediator">
+            <summary>
+            Class responsible for viewmodels communication.
+            </summary>
+        </member>
+        <member name="E:ProjektSemestralnyOOP.Services.ViewModelMediator.UserLogged">
+            <summary>
+            Event that is invoked when user logged in and sends user object to subscribed classes. 
+            </summary>
+        </member>
+        <member name="E:ProjektSemestralnyOOP.Services.ViewModelMediator.ProfileInfoUpdated">
+            <summary>
+            Event that is invoked when Profile tab is opened. 
+            </summary>
+        </member>
+        <member name="E:ProjektSemestralnyOOP.Services.ViewModelMediator.YourCarsUpdated">
+            <summary>
+            Event that is invoked when YourCars tab is opened and sends list of cars to subscribed classes.
+            </summary>
+        </member>
+        <member name="E:ProjektSemestralnyOOP.Services.ViewModelMediator.MarketUpdated">
+            <summary>
+            Event that is invoked when Market tab is opened and sends list of cars to subscribed classes. 
+            </summary>
+        </member>
+        <member name="E:ProjektSemestralnyOOP.Services.ViewModelMediator.UserLoggedOut">
+            <summary>
+            Event that is invoked when user logged out.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.ViewModelMediator.LoginUser(ProjektSemestralnyOOP.MVVM.Model.User)">
+            <summary>
+            Method that invokes <see cref="E:ProjektSemestralnyOOP.Services.ViewModelMediator.UserLogged"/> event.
+            </summary>
+            <param name="user">Object of logged in user</param>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.ViewModelMediator.UpdateProfileInfo">
+            <summary>
+            Method that invokes <see cref="E:ProjektSemestralnyOOP.Services.ViewModelMediator.ProfileInfoUpdated"/> event.
+            </summary>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.ViewModelMediator.UpdateYourCars(System.Collections.Generic.List{System.Tuple{ProjektSemestralnyOOP.MVVM.Model.Car,ProjektSemestralnyOOP.MVVM.Model.Statistic}})">
+            <summary>
+            Method that invokes <see cref="E:ProjektSemestralnyOOP.Services.ViewModelMediator.YourCarsUpdated"/> event. 
+            </summary>
+            <param name="list">List of logged in user's cars from database</param>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.ViewModelMediator.UpdateMarket(System.Collections.Generic.List{System.Tuple{ProjektSemestralnyOOP.MVVM.Model.Car,ProjektSemestralnyOOP.MVVM.Model.Statistic}})">
+            <summary>
+            Method that invokes <see cref="E:ProjektSemestralnyOOP.Services.ViewModelMediator.MarketUpdated"/> event.
+            </summary>
+            <param name="list">List of cars from database</param>
+        </member>
+        <member name="M:ProjektSemestralnyOOP.Services.ViewModelMediator.LogOutUser">
+            <summary>
+            Method that invokes <see cref="E:ProjektSemestralnyOOP.Services.ViewModelMediator.UserLoggedOut"/> event.
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

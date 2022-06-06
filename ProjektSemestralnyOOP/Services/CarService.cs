@@ -21,7 +21,7 @@ namespace ProjektSemestralnyOOP.Services
         /// <summary>
         /// Initializes new instance of <see cref="CarService"/> class.
         /// </summary>
-        /// <param name="contextFactory"></param>
+        /// <param name="contextFactory">ContextFactory object for creating new DBcontext</param>
         public CarService(RacingDBContextFactory contextFactory)
         {
             _context = contextFactory.CreateDbContext();

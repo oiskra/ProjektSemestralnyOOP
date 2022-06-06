@@ -19,7 +19,7 @@ namespace ProjektSemestralnyOOP.Services
         /// <summary>
         /// Initializes new instance of <see cref="UserService"/> class
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="contextFactory">ContextFactory object for creating new DBcontext</param>
         public UserService(RacingDBContextFactory contextFactory)
         {
             _context = contextFactory.CreateDbContext();
