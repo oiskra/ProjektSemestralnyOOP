@@ -3,7 +3,6 @@ using ProjektSemestralnyOOP.DBcontext;
 using ProjektSemestralnyOOP.Interfaces;
 using ProjektSemestralnyOOP.MVVM.Model;
 using ProjektSemestralnyOOP.Services;
-using System.Windows;
 using System.Windows.Input;
 
 namespace ProjektSemestralnyOOP.MVVM.ViewModel
@@ -13,7 +12,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     /// </summary>
     public class RegisterViewModel : BaseViewModel
     {
-        private RegisterWindow _window;
+        private readonly RegisterWindow _window;
+        private readonly IUserService _userService = new UserService(new RacingDBContextFactory());
+
 
         private string _username;
         /// <summary>
@@ -39,7 +40,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             set
             {
                 _login = value;
-                OnPropertyChanged(nameof(Username));
+                OnPropertyChanged(nameof(Login));
             }
         }
 
@@ -89,7 +90,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private async void SubmitRegisterCommand()
         {
-            IUserService service = new UserService(new RacingDBContextFactory());
             User newUser = new()
             {
                 Username = Username,
@@ -98,13 +98,11 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
                 Money = 1000
             };
             
-            await service.RegisterUserAsync(newUser);
+            await _userService.RegisterUserAsync(newUser);
             _window.Hide();
             Username = null;
             Login = null;
             Password = null;
-
-            MessageBox.Show("User register successfully.", "Info");
         }
     }
 }

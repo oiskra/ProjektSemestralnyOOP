@@ -13,6 +13,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     /// </summary>
     public class LoginViewModel : BaseViewModel
     {
+        private readonly IUserService _userService = new UserService(new RacingDBContextFactory());
         private readonly ViewModelMediator _mediator;
         private LoginWindow _window; 
         
@@ -75,8 +76,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private async void SubmitLoginCommand()
         {
-            IUserService service = new UserService(new RacingDBContextFactory());
-            User loggedUser = await service.LoginUserAsync(Login, Password);
+            //IUserService service = new UserService(new RacingDBContextFactory());
+            User loggedUser = await _userService.LoginUserAsync(Login, Password);
 
             if (loggedUser is User)
             {

@@ -41,7 +41,7 @@ namespace ProjektSemestralnyOOP.Services
             if (car.IsAvailable == false) return;
             if(car.Price > user.Money)
             {
-                MessageBox.Show("You can\'t afford the car");
+                MessageBox.Show("You can\'t afford the car", "Info");
                 return;
             }
             car.IsAvailable = false;
@@ -60,7 +60,7 @@ namespace ProjektSemestralnyOOP.Services
         {
 
             Match brandValidator = Regex.Match(carEntity.Brand, @"^(\D{3,20})$|^(\D{3,20}\s{1}\D{3,20})$");
-            Match modelValidator = Regex.Match(carEntity.Model, @"^(\w{1,10})$|^(\w{1,10}\s{1}\w{1,10})$");
+            Match modelValidator = Regex.Match(carEntity.Model, @"^(\S{1,20})$|^(\w{1,10}\s{1}\w{1,10})$");
 
             if (brandValidator.Success && modelValidator.Success)
             {
@@ -72,8 +72,6 @@ namespace ProjektSemestralnyOOP.Services
                         await _context.SaveChangesAsync();
 
                         statisticEntity.CarId = ok.Entity.Id;
-                        /*if (a) await AddStatistic(statisticEntity);
-                        else MessageBox.Show("asd");*/
                         await AddStatistic(statisticEntity);
                         await transaction.CommitAsync();
                         MessageBox.Show("Car created successfully", "Info");
@@ -83,7 +81,7 @@ namespace ProjektSemestralnyOOP.Services
                     catch (ArgumentException e)
                     {
                         await transaction.RollbackAsync();
-                        MessageBox.Show(e.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }

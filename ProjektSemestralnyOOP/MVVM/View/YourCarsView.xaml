@@ -237,7 +237,7 @@
                          BorderBrush="#ffe987"
                          Opacity="0.85"
                          FontFamily="Segoe UI Light"
-                         Text="{Binding ChallengedUsername}"/>
+                         Text="{Binding ChallengedUsername, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Button Width="200"
                         Height="30"

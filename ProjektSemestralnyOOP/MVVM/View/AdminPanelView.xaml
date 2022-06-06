@@ -56,6 +56,42 @@
                        Margin="-220 0 0 0"/>
 
                 <StackPanel Orientation="Horizontal" Height="50" Margin="20 10 0 20">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#0f004a"/>
+                            <Setter Property="Foreground" Value="white"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="#ffa"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid>
+                                            <Border x:Name="border" 
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    Background="{TemplateBinding Background}">
+                                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                          HorizontalAlignment="Center" 
+                                                          VerticalAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Background" Value="#100e31"/>
+                                                <Setter Property="Foreground" Value="SlateGray"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderThickness" Value="2"/>
+                                                <Setter Property="Background" Value="#100e3a"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                        </Style>
+                    </StackPanel.Resources>
                     <TextBlock Text="UserID:"
                                Foreground="White"
                                Height="15"/>
@@ -74,9 +110,7 @@
                             Height="25"
                             FontFamily="Segoe UI Light"
                             Content="Delete"
-                            Background="#100e31"
-                            Foreground="White"
-                            BorderBrush="#100e31"
+                            Cursor="Hand"
                             Command="{Binding DeleteUserButton}"/>
                 </StackPanel>
 
@@ -188,6 +222,7 @@
                             <Setter Property="FontSize" Value="15"/>
                             <Setter Property="FontFamily" Value="Segoe UI Light"/>
                         </Style>
+                        
                     </StackPanel.Resources>
 
                     <StackPanel Orientation="Horizontal" Height="50" 
@@ -303,15 +338,52 @@
                     </StackPanel>
                 </StackPanel>
 
-                <Button Width="215"
-                        Height="30"
-                        Margin="10 20 0 0"
-                        FontFamily="Segoe UI Light"
-                        Content="Create"
-                        Background="#100e31"
-                        Foreground="White"
-                        BorderBrush="#ffa"
-                        Command="{Binding CreateCarButton}"/>
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#0f004a"/>
+                            <Setter Property="Foreground" Value="white"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="#ffa"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid>
+                                            <Border x:Name="border" 
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    Background="{TemplateBinding Background}">
+                                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                          HorizontalAlignment="Center" 
+                                                          VerticalAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Background" Value="#100e31"/>
+                                                <Setter Property="Foreground" Value="SlateGray"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderThickness" Value="2"/>
+                                                <Setter Property="Background" Value="#100e3a"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Width="215"
+                            Height="30"
+                            Margin="10 20 0 0"
+                            FontFamily="Segoe UI Light"
+                            Content="Create"
+                            Cursor="Hand"
+                            Command="{Binding CreateCarButton}"/>
+
+                </StackPanel>
 
             </StackPanel>
         </Grid>

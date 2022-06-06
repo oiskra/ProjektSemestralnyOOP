@@ -8,7 +8,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     /// <summary>
     /// Provides interaction logic for StartUp view.
     /// </summary>
-    public class StartUpViewModel 
+    public class StartUpViewModel : BaseViewModel
     {
         private readonly LoginWindow _loginWindow;
         private readonly RegisterWindow _registerWindow;

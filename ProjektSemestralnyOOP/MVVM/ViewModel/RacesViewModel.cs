@@ -13,8 +13,8 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     /// </summary>
     public class RacesViewModel : BaseViewModel
     {
-        private User _loggedUser;
-        private IRaceService _raceService;
+        private readonly User _loggedUser;
+        private readonly IRaceService _raceService = new RaceService(new RacingDBContextFactory());
 
         private ObservableCollection<Race> _races;
         /// <summary>
@@ -45,8 +45,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         /// </summary>
         /// <param name="loggedUser">Object of logged in user</param>
         public RacesViewModel(User loggedUser)
-        {
-            _raceService = new RaceService(new RacingDBContextFactory());
+        { 
             SeeAllButton = new RelayCommand(SeeAllCommand);
             SeeYoursButton = new RelayCommand(SeeYoursCommand);
             _loggedUser = loggedUser;

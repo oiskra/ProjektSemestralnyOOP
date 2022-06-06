@@ -153,8 +153,6 @@
                     Content="CANCEL"
                     Command="{Binding CancelCommand}"/>
 
-
-
         </StackPanel>
 
     </Grid>

@@ -41,6 +41,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         /// <summary>
         /// Determines whether the admin panel button should be shown or not.
         /// </summary>
+        /// <value>True if logged user is an Admin, false for every other user</value>
         public bool ShowAdminButton
         {
             get => _showAdminButton; 
@@ -86,7 +87,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             YourCarsButton = new RelayCommand(YourCarsNavCommand, () => _loggedUser != null);
             RacesButton = new RelayCommand(RacesNavCommand, () => _loggedUser != null);
             LogOutButton = new RelayCommand(LogOutCommand, () => _loggedUser != null);
-            AdminPanelButton = new RelayCommand(AdminPanelNavCommand);
+            AdminPanelButton = new RelayCommand(AdminPanelNavCommand, () => _loggedUser != null);
             _mediator = mediator;
             _mediator.UserLogged += OnUserLogged;
             InitiateStartupView();

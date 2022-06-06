@@ -17,10 +17,9 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     public class YourCarsViewModel : BaseViewModel
     {
         private readonly static RacingDBContextFactory _contextFactory = new();
-        private readonly ICarService _carService = new CarService(_contextFactory);
         private readonly IRaceService _raceService = new RaceService(_contextFactory);
-        private ViewModelMediator _mediatior;
-        private User _loggedUser;
+        private readonly ViewModelMediator _mediatior;
+        private readonly User _loggedUser;
 
         private ObservableCollection<Tuple<Car, Statistic>> _yourCars;
         /// <summary>
@@ -74,7 +73,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
         /// <param name="loggedUser">Object of logged in user</param>
         public YourCarsViewModel(User loggedUser, ViewModelMediator mediator)
         {
-            ChallengeButton = new RelayCommand(ChallengeCommand);
+            ChallengeButton = new RelayCommand(ChallengeCommand, () => ChallengedUsername != null);
             _mediatior = mediator;
             _loggedUser = loggedUser;
             _mediatior.YourCarsUpdated += OnYourCarsUpdated;

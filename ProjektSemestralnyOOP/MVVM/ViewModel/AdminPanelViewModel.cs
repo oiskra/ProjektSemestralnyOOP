@@ -162,7 +162,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private async void CreateCarCommand()
         {
-            int speedParsed = 0, accelerationParsed = 0, gripParsed = 0, brakingParsed = 0;
+            int speedParsed, accelerationParsed = 0, gripParsed = 0, brakingParsed = 0;
 
             bool parseSuccess = int.TryParse(Speed, out speedParsed)
                 && int.TryParse(Acceleration, out accelerationParsed)

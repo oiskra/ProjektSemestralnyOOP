@@ -87,11 +87,19 @@ namespace ProjektSemestralnyOOP.Services
         /// <returns><see cref="Task"/></returns>
         public async Task RegisterUserAsync(User user)
         {
-            Regex userValidator = new(@"^\w{7,}$");
-            bool match = userValidator.IsMatch(user.Username) && userValidator.IsMatch(user.Login) && userValidator.IsMatch(user.Password);
+            Match passwordValidator = Regex.Match(user.Password, @"^\S{8,}$");
+            Regex usernameAndLoginValidator = new(@"^\S{4,}$");
+            bool match = usernameAndLoginValidator.IsMatch(user.Login) && usernameAndLoginValidator.IsMatch(user.Username);
+            
+            if(!passwordValidator.Success)
+            {
+                MessageBox.Show("Password can\'t have whitespaces and must be at least 8 characters long", "Info");
+                return;
+            }
+
             if(!match)
             {
-                MessageBox.Show("Username, login and password must be at least 7 characters long", "Info");
+                MessageBox.Show("Username and login can\'t have whitespaces and must be at least 4 characters long", "Info");
                 return;
             }
 
@@ -100,6 +108,7 @@ namespace ProjektSemestralnyOOP.Services
             {
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
+                MessageBox.Show("User registerd successfully", "Info");
                 return;
             }
 
@@ -113,11 +122,19 @@ namespace ProjektSemestralnyOOP.Services
         /// <returns><see cref="Task"/></returns>
         public async Task<bool> UpdateUserAsync(User updatedUser)
         {
-            Regex userValidator = new(@"^\w{7,}$");
-            bool match = userValidator.IsMatch(updatedUser.Username) && userValidator.IsMatch(updatedUser.Login) && userValidator.IsMatch(updatedUser.Password);
+            Match passwordValidator = Regex.Match(updatedUser.Password, @"^\S{8,}$");
+            Regex usernameAndLoginValidator = new(@"^\S{4,}$");
+            bool match = usernameAndLoginValidator.IsMatch(updatedUser.Login) && usernameAndLoginValidator.IsMatch(updatedUser.Username);
+
+            if (!passwordValidator.Success)
+            {
+                MessageBox.Show("Password can\'t have whitespaces and must be at least 8 characters long", "Info");
+                return false;
+            }
+
             if (!match)
             {
-                MessageBox.Show("Username, login and password must be at least 7 characters long", "Info");
+                MessageBox.Show("Username and login can\'t have whitespaces and must be at least 4 characters long", "Info");
                 return false;
             }
 

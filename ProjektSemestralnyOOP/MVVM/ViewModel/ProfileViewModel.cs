@@ -12,7 +12,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
     /// </summary>
     public class ProfileViewModel : BaseViewModel
     {
-        private readonly IUserService _userService;
+        private IUserService _userService = new UserService(new());
         private readonly ViewModelMediator _mediator; 
         private readonly User _loggedUser;
 
@@ -142,7 +142,6 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
             _mediator = mediator;
             _mediator.ProfileInfoUpdated += OnProfileInfoUpdated;
             _loggedUser = user;
-            _userService = new UserService(new());
 
             _usernameToUpdate = _loggedUser.Username;
             _loginToUpdate = _loggedUser.Login;
@@ -184,6 +183,7 @@ namespace ProjektSemestralnyOOP.MVVM.ViewModel
 
         private async void OnProfileInfoUpdated()
         {
+            _userService = new UserService(new());  
             User user = await _userService.ReadUserAsync(_loggedUser.Id);
             Id = user.Id;
             Username = user.Username;
